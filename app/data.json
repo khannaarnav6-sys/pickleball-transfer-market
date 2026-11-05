@@ -1,0 +1,2572 @@
+{
+  "model": {
+    "n": 60,
+    "season": 2026,
+    "form": {
+      "cutoff": "2026-02-27",
+      "covered": 52,
+      "imputed": 8
+    },
+    "target": "log(price_raw)",
+    "alpha": 10.0,
+    "intercept": 9.853990232435027,
+    "r2": 0.34394176809464294,
+    "mae_dollars": 83447.16532453064,
+    "fold_r2_mean": 0.1880411246558139,
+    "fold_r2_sd": 0.3151025098265285,
+    "fold_r2_p10": -0.27933931253530014,
+    "fold_r2_p90": 0.5719525455875972,
+    "n_folds": 100,
+    "resid_sd_log": 1.234062434734346,
+    "band_z": 1.2816,
+    "band_label": "80%",
+    "coefficients": [
+      {
+        "name": "pd_doubles_mean",
+        "label": "Doubles form",
+        "coef": 0.5957239488227122
+      },
+      {
+        "name": "pd_round_max",
+        "label": "Best finish",
+        "coef": 0.37410510987795836
+      },
+      {
+        "name": "pd_events",
+        "label": "Brackets entered",
+        "coef": 0.12927304123192637
+      },
+      {
+        "name": "log_total_2025",
+        "label": "2025 earnings",
+        "coef": -0.09822042123629672
+      }
+    ],
+    "features": [
+      {
+        "name": "pd_doubles_mean",
+        "label": "Doubles form",
+        "blurb": "Average round reached in doubles brackets in the weeks before the draft, on a 1-7 ladder (Round of 32 = 1, Champion = 7). MLP is played as team doubles, so this is the most direct evidence bidders had.",
+        "kind": "linear",
+        "coef": 0.5957239488227122,
+        "mean": 1.5292857142857144,
+        "std": 0.8793532300359186,
+        "display_min": 1.0,
+        "display_max": 6.625,
+        "decimals": 2,
+        "ols_coef": 0.7575207240155515,
+        "ci_lo": 0.31164450920965064,
+        "ci_hi": 1.2033969388214523,
+        "p_value": 0.001242855344812365
+      },
+      {
+        "name": "pd_round_max",
+        "label": "Best finish",
+        "blurb": "Deepest run in any bracket before the draft, same 1-7 ladder. Catches the player who broke through once but is otherwise unremarkable.",
+        "kind": "linear",
+        "coef": 0.37410510987795836,
+        "mean": 2.5833333333333335,
+        "std": 1.5630276886720706,
+        "display_min": 1.0,
+        "display_max": 7.0,
+        "decimals": 0,
+        "ols_coef": 0.3964985055339863,
+        "ci_lo": -0.0216896889460359,
+        "ci_hi": 0.8146867000140086,
+        "p_value": 0.06266682475246155
+      },
+      {
+        "name": "pd_events",
+        "label": "Brackets entered",
+        "blurb": "How many brackets the player entered before draft day. Partly form, partly a measure of who was healthy and active on tour.",
+        "kind": "linear",
+        "coef": 0.12927304123192637,
+        "mean": 5.683333333333334,
+        "std": 2.8489276735096114,
+        "display_min": 1.0,
+        "display_max": 12.0,
+        "decimals": 0,
+        "ols_coef": 0.15442577408933666,
+        "ci_lo": -0.198030065939043,
+        "ci_hi": 0.5068816141177164,
+        "p_value": 0.3837327552938244
+      },
+      {
+        "name": "log_total_2025",
+        "label": "2025 earnings",
+        "blurb": "Contracts plus prize money the season before the draft. Carried the model before form was available; now adds almost nothing on top of it.",
+        "kind": "money",
+        "coef": -0.09822042123629672,
+        "mean": 9.308279520438324,
+        "std": 2.30304986298902,
+        "display_min": 150.0,
+        "display_max": 970595.0,
+        "decimals": 0,
+        "ols_coef": -0.23656924497012266,
+        "ci_lo": -0.6600509285488527,
+        "ci_hi": 0.18691243860860735,
+        "p_value": 0.2677845404174355
+      }
+    ],
+    "baselines": {
+      "mean_only": {
+        "r2": -0.00693984355878885,
+        "mae_dollars": 58291.23847717886,
+        "fold_r2_mean": -0.172681130199242,
+        "fold_r2_sd": 0.24117653375004838
+      },
+      "earnings_only": {
+        "r2": 0.05927202874600268,
+        "mae_dollars": 56556.822003304354,
+        "fold_r2_mean": -0.1040409426897681,
+        "fold_r2_sd": 0.26549968517584527
+      }
+    },
+    "beats_earnings_only": true,
+    "beats_mean_only": true,
+    "alpha_sensitivity": [
+      {
+        "alpha": 0.1,
+        "r2": 0.2958129692909488
+      },
+      {
+        "alpha": 1.0,
+        "r2": 0.30571263559415096
+      },
+      {
+        "alpha": 3.0,
+        "r2": 0.32151841101976786
+      },
+      {
+        "alpha": 10.0,
+        "r2": 0.34394176809464294
+      },
+      {
+        "alpha": 30.0,
+        "r2": 0.3397689792744043
+      },
+      {
+        "alpha": 100.0,
+        "r2": 0.27162698177924127
+      },
+      {
+        "alpha": 300.0,
+        "r2": 0.16035766212498903
+      }
+    ],
+    "holdout_2024_rank": null,
+    "diagnostics": {
+      "predicted_min": 7230.9205719004385,
+      "predicted_max": 1587070.399496371,
+      "predicted_spread_x": 219.48386567317186,
+      "actual_min": 1000.0,
+      "actual_max": 1230000.0,
+      "actual_spread_x": 1230.0,
+      "resid_vs_actual_corr": -0.8165192544918537,
+      "oof_vs_insample_resid_corr": 0.991539163051584,
+      "in_sample_r2": 0.411839922940043
+    }
+  },
+  "players": [
+    {
+      "player_key": "anna-bright",
+      "player": "Anna Bright",
+      "team": "St. Louis Shock",
+      "pick_no": 1,
+      "gender": "Female",
+      "actual": 1230000,
+      "predicted": 1587070,
+      "predicted_lo": 326383,
+      "predicted_hi": 7717297,
+      "predicted_oof": 4358378,
+      "residual_log": 0.2548756312872005,
+      "residual_log_oof": 1.2650857404970353,
+      "features": {
+        "pd_doubles_mean": 6.625,
+        "pd_round_max": 7.0,
+        "pd_events": 8.0,
+        "log_total_2025": 13.785665594782593
+      },
+      "contributions": {
+        "pd_doubles_mean": 3.4521270095681857,
+        "pd_round_max": 1.0571134347795343,
+        "pd_events": 0.10512114726720843,
+        "log_total_2025": -0.19095146541415534
+      },
+      "display": {
+        "total_2025": 970595.0,
+        "career_earnings": 3276906.0,
+        "earnings_rank": 3.0,
+        "card_tier": "Gold Card",
+        "pd_events": 8.0,
+        "pd_doubles_mean": 6.625,
+        "pd_round_max": 7.0,
+        "pd_titles": 5.0,
+        "pd_podiums": 8.0,
+        "pd_prize": 185500.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "jorja-johnson",
+      "player": "Jorja Johnson",
+      "team": "New Jersey 5s",
+      "pick_no": 2,
+      "gender": "Female",
+      "actual": 800000,
+      "predicted": 241431,
+      "predicted_lo": 49650,
+      "predicted_hi": 1173982,
+      "predicted_oof": 173452,
+      "residual_log": -1.1980294724605898,
+      "residual_log_oof": -1.5287080521868806,
+      "features": {
+        "pd_doubles_mean": 4.166666666666667,
+        "pd_round_max": 6.0,
+        "pd_events": 8.0,
+        "log_total_2025": 13.276881989536195
+      },
+      "contributions": {
+        "pd_doubles_mean": 1.786712030884347,
+        "pd_round_max": 0.8177669967162436,
+        "pd_events": 0.10512114726720843,
+        "log_total_2025": -0.1692528731133506
+      },
+      "display": {
+        "total_2025": 583547.0,
+        "career_earnings": 1794064.0,
+        "earnings_rank": 16.0,
+        "card_tier": "Standard",
+        "pd_events": 8.0,
+        "pd_doubles_mean": 4.166666666666667,
+        "pd_round_max": 6.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 4.0,
+        "pd_prize": 49802.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "danni-elle-townsend",
+      "player": "Danni-Elle Townsend",
+      "team": "Columbus Sliders",
+      "pick_no": 3,
+      "gender": "Female",
+      "actual": 180000,
+      "predicted": 13644,
+      "predicted_lo": 2806,
+      "predicted_hi": 66347,
+      "predicted_oof": 13145,
+      "residual_log": -2.579631445022807,
+      "residual_log_oof": -2.616897121479772,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 9.741027444837728
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": -0.018455824212367567
+      },
+      "display": {
+        "total_2025": 17000.0,
+        "career_earnings": 32565.0,
+        "earnings_rank": 133.0,
+        "card_tier": null,
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "lea-jansen",
+      "player": "Lea Jansen",
+      "team": "Texas Ranchers",
+      "pick_no": 4,
+      "gender": "Female",
+      "actual": 105000,
+      "predicted": 78703,
+      "predicted_lo": 16185,
+      "predicted_hi": 382699,
+      "predicted_oof": 84357,
+      "residual_log": -0.2882847379386728,
+      "residual_log_oof": -0.21890043254444969,
+      "features": {
+        "pd_doubles_mean": 2.2857142857142856,
+        "pd_round_max": 6.0,
+        "pd_events": 11.0,
+        "log_total_2025": 12.872888684343732
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.5124477856928382,
+        "pd_round_max": 0.8177669967162436,
+        "pd_events": 0.24124925164201078,
+        "log_total_2025": -0.1520233752851324
+      },
+      "display": {
+        "total_2025": 389604.0,
+        "career_earnings": 1112486.0,
+        "earnings_rank": 24.0,
+        "card_tier": "Standard",
+        "pd_events": 11.0,
+        "pd_doubles_mean": 2.2857142857142856,
+        "pd_round_max": 6.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 2.0,
+        "pd_prize": 12360.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "ting-chieh-wei",
+      "player": "Ting Chieh Wei",
+      "team": "Chicago Slice",
+      "pick_no": 5,
+      "gender": "Female",
+      "actual": 75000,
+      "predicted": 27726,
+      "predicted_lo": 5702,
+      "predicted_hi": 134822,
+      "predicted_oof": 27692,
+      "residual_log": -0.9951089974358602,
+      "residual_log_oof": -0.9963297137889242,
+      "features": {
+        "pd_doubles_mean": 1.8333333333333333,
+        "pd_round_max": 3.0,
+        "pd_events": 8.0,
+        "log_total_2025": 10.121538156784329
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.20597916976070324,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": 0.10512114726720843,
+        "log_total_2025": -0.034683836906722526
+      },
+      "display": {
+        "total_2025": 24872.0,
+        "career_earnings": 39476.0,
+        "earnings_rank": 129.0,
+        "card_tier": "Standard",
+        "pd_events": 8.0,
+        "pd_doubles_mean": 1.8333333333333333,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 4868.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "mari-humberg",
+      "player": "Mari Humberg",
+      "team": "Chicago Slice",
+      "pick_no": 6,
+      "gender": "Female",
+      "actual": 90000,
+      "predicted": 39528,
+      "predicted_lo": 8129,
+      "predicted_hi": 192208,
+      "predicted_oof": 38493,
+      "residual_log": -0.8228074394585274,
+      "residual_log_oof": -0.8493391798828487,
+      "features": {
+        "pd_doubles_mean": 2.25,
+        "pd_round_max": 3.0,
+        "pd_events": 12.0,
+        "log_total_2025": 12.680973638091665
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.488252894961354,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": 0.2866252864336115,
+        "log_total_2025": -0.14383858650248882
+      },
+      "display": {
+        "total_2025": 321570.0,
+        "career_earnings": 946269.0,
+        "earnings_rank": 34.0,
+        "card_tier": "Standard",
+        "pd_events": 12.0,
+        "pd_doubles_mean": 2.25,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 8744.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "dylan-frazier",
+      "player": "Dylan Frazier",
+      "team": "Brooklyn Pickleball Team",
+      "pick_no": 7,
+      "gender": "Male",
+      "actual": 170000,
+      "predicted": 85427,
+      "predicted_lo": 17568,
+      "predicted_hi": 415400,
+      "predicted_oof": 71896,
+      "residual_log": -0.6881311914486297,
+      "residual_log_oof": -0.8605721672595159,
+      "features": {
+        "pd_doubles_mean": 2.857142857142857,
+        "pd_round_max": 5.0,
+        "pd_events": 10.0,
+        "log_total_2025": 13.351320397714268
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.8995660373965878,
+        "pd_round_max": 0.5784205586529528,
+        "pd_events": 0.19587321685040998,
+        "log_total_2025": -0.17242752075120968
+      },
+      "display": {
+        "total_2025": 628643.0,
+        "career_earnings": 1803727.0,
+        "earnings_rank": 15.0,
+        "card_tier": "Gold Card",
+        "pd_events": 10.0,
+        "pd_doubles_mean": 2.857142857142857,
+        "pd_round_max": 5.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 2.0,
+        "pd_prize": 12850.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "jack-sock",
+      "player": "Jack Sock",
+      "team": "Orlando Squeeze",
+      "pick_no": 8,
+      "gender": null,
+      "actual": 105000,
+      "predicted": 70119,
+      "predicted_lo": 14420,
+      "predicted_hi": 340960,
+      "predicted_oof": 65078,
+      "residual_log": -0.4037684086148321,
+      "residual_log_oof": -0.47836639111789836,
+      "features": {
+        "pd_doubles_mean": 2.5,
+        "pd_round_max": 6.0,
+        "pd_events": 6.0,
+        "log_total_2025": 13.664786500554918
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.6576171300817443,
+        "pd_round_max": 0.8177669967162436,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": -0.18579621639219315
+      },
+      "display": {
+        "total_2025": 860084.0,
+        "career_earnings": 2380200.0,
+        "earnings_rank": 10.0,
+        "card_tier": "Gold Card",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 2.5,
+        "pd_round_max": 6.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 1.0,
+        "pd_prize": 29033.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "tama-shimabukuro",
+      "player": "Tama Shimabukuro",
+      "team": "Utah Black Diamonds",
+      "pick_no": 9,
+      "gender": "Male",
+      "actual": 125000,
+      "predicted": 23622,
+      "predicted_lo": 4858,
+      "predicted_hi": 114863,
+      "predicted_oof": 20819,
+      "residual_log": -1.6661491256981833,
+      "residual_log_oof": -1.7924702924736788,
+      "features": {
+        "pd_doubles_mean": 1.6666666666666667,
+        "pd_round_max": 3.0,
+        "pd_events": 5.0,
+        "log_total_2025": 8.038834757787749
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.0930696796804431,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": 0.054139253052005974
+      },
+      "display": {
+        "total_2025": 3098.0,
+        "career_earnings": 24813.0,
+        "earnings_rank": 143.0,
+        "card_tier": null,
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.6666666666666667,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 941.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "jonathan-truong",
+      "player": "Jonathan Truong",
+      "team": "Phoenix Flames",
+      "pick_no": 10,
+      "gender": "Male",
+      "actual": 85000,
+      "predicted": 16184,
+      "predicted_lo": 3328,
+      "predicted_hi": 78696,
+      "predicted_oof": 16462,
+      "residual_log": -1.6586290364240934,
+      "residual_log_oof": -1.6416080693477522,
+      "features": {
+        "pd_doubles_mean": 1.5,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 9.709781436875536
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.01983981039981721,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": -0.017123245133938026
+      },
+      "display": {
+        "total_2025": 16477.0,
+        "career_earnings": 27495.0,
+        "earnings_rank": 137.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.5,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 3167.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "meghan-dizon",
+      "player": "Meghan Dizon",
+      "team": "SoCal Hard Eights",
+      "pick_no": 11,
+      "gender": "Female",
+      "actual": 85000,
+      "predicted": 70764,
+      "predicted_lo": 14553,
+      "predicted_hi": 344096,
+      "predicted_oof": 60458,
+      "residual_log": -0.18330641964691097,
+      "residual_log_oof": -0.34070513585045425,
+      "features": {
+        "pd_doubles_mean": 2.8333333333333335,
+        "pd_round_max": 5.0,
+        "pd_events": 6.0,
+        "log_total_2025": 13.132982791302199
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.883436110242265,
+        "pd_round_max": 0.5784205586529528,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": -0.16311586318870885
+      },
+      "display": {
+        "total_2025": 505337.0,
+        "career_earnings": 1420789.0,
+        "earnings_rank": 19.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 2.8333333333333335,
+        "pd_round_max": 5.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 1.0,
+        "pd_prize": 9840.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "tyson-mcguffin",
+      "player": "Tyson McGuffin",
+      "team": "Palm Beach Royals",
+      "pick_no": 12,
+      "gender": "Male",
+      "actual": 65000,
+      "predicted": 31311,
+      "predicted_lo": 6439,
+      "predicted_hi": 152254,
+      "predicted_oof": 28683,
+      "residual_log": -0.7304086512961145,
+      "residual_log_oof": -0.8180985799138174,
+      "features": {
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 3.0,
+        "pd_events": 11.0,
+        "log_total_2025": 13.109677247663777
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.3188886598409636,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": 0.24124925164201078,
+        "log_total_2025": -0.1621219288627122
+      },
+      "display": {
+        "total_2025": 493696.0,
+        "career_earnings": 1406850.0,
+        "earnings_rank": 20.0,
+        "card_tier": "Gold Card",
+        "pd_events": 11.0,
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 19553.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "cailyn-campbell",
+      "player": "Cailyn Campbell",
+      "team": "SoCal Hard Eights",
+      "pick_no": 13,
+      "gender": "Female",
+      "actual": 65000,
+      "predicted": 19932,
+      "predicted_lo": 4099,
+      "predicted_hi": 96923,
+      "predicted_oof": 16966,
+      "residual_log": -1.182047134748128,
+      "residual_log_oof": -1.3431533914486309,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 12.0,
+        "log_total_2025": 7.237778191923443
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.2866252864336115,
+        "log_total_2025": 0.08830269631813577
+      },
+      "display": {
+        "total_2025": 1390.0,
+        "career_earnings": 14247.0,
+        "earnings_rank": 175.0,
+        "card_tier": "Standard",
+        "pd_events": 12.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 4105.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "armaan-bhatia",
+      "player": "Armaan Bhatia",
+      "team": "SoCal Hard Eights",
+      "pick_no": 14,
+      "gender": "Male",
+      "actual": 40000,
+      "predicted": 16562,
+      "predicted_lo": 3406,
+      "predicted_hi": 80537,
+      "predicted_oof": 16784,
+      "residual_log": -0.8817408571006222,
+      "residual_log_oof": -0.8684266786501329,
+      "features": {
+        "pd_doubles_mean": 1.6,
+        "pd_round_max": 2.0,
+        "pd_events": 5.0,
+        "log_total_2025": 9.692272572087193
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.047905883648339004,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": -0.016376527443402004
+      },
+      "display": {
+        "total_2025": 16191.0,
+        "career_earnings": 27323.0,
+        "earnings_rank": 138.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.6,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 3138.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "kiora-kunimoto",
+      "player": "Kiora Kunimoto",
+      "team": "California Black Bears",
+      "pick_no": 15,
+      "gender": "Female",
+      "actual": 45000,
+      "predicted": 27047,
+      "predicted_lo": 5562,
+      "predicted_hi": 131517,
+      "predicted_oof": 30951,
+      "residual_log": -0.5091030102837646,
+      "residual_log_oof": -0.3742552072412284,
+      "features": {
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 4.0,
+        "pd_events": 9.0,
+        "log_total_2025": 7.319202458767849
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.2230768925442857,
+        "pd_round_max": 0.33907412058966196,
+        "pd_events": 0.15049718205880921,
+        "log_total_2025": 0.08483011592947905
+      },
+      "display": {
+        "total_2025": 1508.0,
+        "career_earnings": 11056.0,
+        "earnings_rank": 198.0,
+        "card_tier": "Standard",
+        "pd_events": 9.0,
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 4.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 1.0,
+        "pd_prize": 4072.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "camden-chaffin",
+      "player": "Camden Chaffin",
+      "team": "Phoenix Flames",
+      "pick_no": 16,
+      "gender": null,
+      "actual": 35000,
+      "predicted": 16347,
+      "predicted_lo": 3362,
+      "predicted_hi": 79487,
+      "predicted_oof": 12247,
+      "residual_log": -0.7613342354357346,
+      "residual_log_oof": -1.0500838764586984,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 3.0,
+        "pd_events": 4.0,
+        "log_total_2025": 5.017279836814924
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": -0.07638299189919463,
+        "log_total_2025": 0.18300246261420858
+      },
+      "display": {
+        "total_2025": 150.0,
+        "career_earnings": 3726.0,
+        "earnings_rank": 342.0,
+        "card_tier": null,
+        "pd_events": 4.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 689.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "will-mackinnon",
+      "player": "Will MacKinnon",
+      "team": "SoCal Hard Eights",
+      "pick_no": 17,
+      "gender": "Male",
+      "actual": 40000,
+      "predicted": 16735,
+      "predicted_lo": 3442,
+      "predicted_hi": 81376,
+      "predicted_oof": 14150,
+      "residual_log": -0.8713775452298407,
+      "residual_log_oof": -1.0391614734402665,
+      "features": {
+        "pd_doubles_mean": 1.5,
+        "pd_round_max": 2.0,
+        "pd_events": 4.0,
+        "log_total_2025": 6.796823718274855
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.01983981039981721,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.07638299189919463,
+        "log_total_2025": 0.10710851326713694
+      },
+      "display": {
+        "total_2025": 894.0,
+        "career_earnings": 7230.0,
+        "earnings_rank": 240.0,
+        "card_tier": "Standard",
+        "pd_events": 4.0,
+        "pd_doubles_mean": 1.5,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2208.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "len-yang",
+      "player": "Len Yang",
+      "team": "Bay Area Breakers",
+      "pick_no": 18,
+      "gender": null,
+      "actual": 35000,
+      "predicted": 18382,
+      "predicted_lo": 3780,
+      "predicted_hi": 89384,
+      "predicted_oof": 19034,
+      "residual_log": -0.6439819146690287,
+      "residual_log_oof": -0.609145192427393,
+      "features": {
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 2.0,
+        "pd_events": 1.0,
+        "log_total_2025": 9.346443454968522
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.3188886598409636,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": -0.001627614662552521
+      },
+      "display": {
+        "total_2025": 11457.0,
+        "career_earnings": 16160.0,
+        "earnings_rank": 168.0,
+        "card_tier": "Standard",
+        "pd_events": 1.0,
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 760.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "callie-smith",
+      "player": "Callie Smith",
+      "team": "Dallas Flash",
+      "pick_no": 19,
+      "gender": "Female",
+      "actual": 50000,
+      "predicted": 27620,
+      "predicted_lo": 5680,
+      "predicted_hi": 134303,
+      "predicted_oof": 31296,
+      "residual_log": -0.5934982258600954,
+      "residual_log_oof": -0.4685455505888161,
+      "features": {
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 3.0,
+        "pd_events": 8.0,
+        "log_total_2025": 12.859389527177186
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.3188886598409636,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": 0.10512114726720843,
+        "log_total_2025": -0.15144766351938183
+      },
+      "display": {
+        "total_2025": 384380.0,
+        "career_earnings": 1076897.0,
+        "earnings_rank": 26.0,
+        "card_tier": "Standard",
+        "pd_events": 8.0,
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 6336.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "daria-walczak",
+      "player": "Daria Walczak",
+      "team": "Atlanta Bouncers",
+      "pick_no": 20,
+      "gender": "Female",
+      "actual": 45000,
+      "predicted": 7231,
+      "predicted_lo": 1487,
+      "predicted_hi": 35161,
+      "predicted_oof": 6903,
+      "residual_log": -1.8282961350244413,
+      "residual_log_oof": -1.8747469675104274,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 1.0,
+        "log_total_2025": 9.726213236963687
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": -0.017824028192205885
+      },
+      "display": {
+        "total_2025": 16750.0,
+        "career_earnings": 23100.0,
+        "earnings_rank": 147.0,
+        "card_tier": null,
+        "pd_events": 1.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 93.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "sahra-dennehy",
+      "player": "Sahra Dennehy",
+      "team": "Texas Ranchers",
+      "pick_no": 22,
+      "gender": "Female",
+      "actual": 35000,
+      "predicted": 13905,
+      "predicted_lo": 2859,
+      "predicted_hi": 67613,
+      "predicted_oof": 13489,
+      "residual_log": -0.923127785882663,
+      "residual_log_oof": -0.9534644931915359,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 9.29798488182823
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.00043904552698074056
+      },
+      "display": {
+        "total_2025": 10915.0,
+        "career_earnings": 11715.0,
+        "earnings_rank": 192.0,
+        "card_tier": null,
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "eugenie-bouchard",
+      "player": "Genie Bouchard",
+      "team": "Florida Smash",
+      "pick_no": 23,
+      "gender": "Female",
+      "actual": 20000,
+      "predicted": 29617,
+      "predicted_lo": 6091,
+      "predicted_hi": 144014,
+      "predicted_oof": 28817,
+      "residual_log": 0.39260174174728313,
+      "residual_log_oof": 0.3652165855156593,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 6.0,
+        "pd_events": 5.0,
+        "log_total_2025": 8.982184278838428
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": 0.8177669967162436,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": 0.013907302880331276
+      },
+      "display": {
+        "total_2025": 7959.0,
+        "career_earnings": 14232.0,
+        "earnings_rank": 176.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 6.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 1.0,
+        "pd_prize": 3431.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "christopher-haworth",
+      "player": "Chris Haworth",
+      "team": "California Black Bears",
+      "pick_no": 24,
+      "gender": "Male",
+      "actual": 30000,
+      "predicted": 35531,
+      "predicted_lo": 7307,
+      "predicted_hi": 172773,
+      "predicted_oof": 37916,
+      "residual_log": 0.1692067273591693,
+      "residual_log_oof": 0.23417680235533567,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 7.0,
+        "pd_events": 5.0,
+        "log_total_2025": 10.32518683708304
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": 1.0571134347795343,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": -0.04336904146290832
+      },
+      "display": {
+        "total_2025": 30490.0,
+        "career_earnings": 146254.0,
+        "earnings_rank": 95.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 7.0,
+        "pd_titles": 2.0,
+        "pd_podiums": 3.0,
+        "pd_prize": 18773.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "ella-yeh",
+      "player": "Ella Yeh",
+      "team": "Bay Area Breakers",
+      "pick_no": 26,
+      "gender": "Female",
+      "actual": 10000,
+      "predicted": 9015,
+      "predicted_lo": 1854,
+      "predicted_hi": 43835,
+      "predicted_oof": 9631,
+      "residual_log": -0.10373810537476835,
+      "residual_log_oof": -0.03757846674204224,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 2.0,
+        "log_total_2025": 5.62040086571715
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.16713506148239618,
+        "log_total_2025": 0.15728056988959252
+      },
+      "display": {
+        "total_2025": 275.0,
+        "career_earnings": 1524.0,
+        "earnings_rank": 498.0,
+        "card_tier": null,
+        "pd_events": 2.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 487.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "estee-widdershoven",
+      "player": "Estee Widdershoven",
+      "team": "Miami Pickleball Club",
+      "pick_no": 27,
+      "gender": "Female",
+      "actual": 10000,
+      "predicted": 7779,
+      "predicted_lo": 1600,
+      "predicted_hi": 37825,
+      "predicted_oof": 9128,
+      "residual_log": -0.2511897648486521,
+      "residual_log_oof": -0.0912126560128872,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 2.0,
+        "log_total_2025": 9.077813488005308
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.16713506148239618,
+        "log_total_2025": 0.009828910415708523
+      },
+      "display": {
+        "total_2025": null,
+        "career_earnings": 227.0,
+        "earnings_rank": 1094.0,
+        "card_tier": null,
+        "pd_events": 2.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 77.0,
+        "has_results": 1,
+        "imputed_total_2025": true
+      }
+    },
+    {
+      "player_key": "john-goins",
+      "player": "John Lucian Goins",
+      "team": "St. Louis Shock",
+      "pick_no": 29,
+      "gender": "Male",
+      "actual": 25000,
+      "predicted": 18515,
+      "predicted_lo": 3808,
+      "predicted_hi": 90030,
+      "predicted_oof": 18593,
+      "residual_log": -0.30030634240910814,
+      "residual_log_oof": -0.29607143851040263,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 3.0,
+        "pd_events": 8.0,
+        "log_total_2025": 10.323808431876278
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": 0.10512114726720843,
+        "log_total_2025": -0.0433102552671693
+      },
+      "display": {
+        "total_2025": 30448.0,
+        "career_earnings": 78831.0,
+        "earnings_rank": 113.0,
+        "card_tier": "Standard",
+        "pd_events": 8.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 3806.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "elsie-hendershot",
+      "player": "Elsie Hendershot",
+      "team": "St. Louis Shock",
+      "pick_no": 30,
+      "gender": null,
+      "actual": 28000,
+      "predicted": 7779,
+      "predicted_lo": 1600,
+      "predicted_hi": 37825,
+      "predicted_oof": 6967,
+      "residual_log": -1.2808091820298095,
+      "residual_log_oof": -1.3910114432852048,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 2.0,
+        "log_total_2025": 9.077813488005308
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.16713506148239618,
+        "log_total_2025": 0.009828910415708523
+      },
+      "display": {
+        "total_2025": null,
+        "career_earnings": 3066.0,
+        "earnings_rank": 369.0,
+        "card_tier": null,
+        "pd_events": 2.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 214.0,
+        "has_results": 1,
+        "imputed_total_2025": true
+      }
+    },
+    {
+      "player_key": "braden-jacobson",
+      "player": "Braden Jacobson",
+      "team": "Las Vegas Night Owls",
+      "pick_no": 31,
+      "gender": "Male",
+      "actual": 30000,
+      "predicted": 8364,
+      "predicted_lo": 1720,
+      "predicted_hi": 40673,
+      "predicted_oof": 7776,
+      "residual_log": -1.2772104240490165,
+      "residual_log_oof": -1.3502157590100374,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 1.0,
+        "log_total_2025": 6.311734809152915
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": 0.12779657467505437
+      },
+      "display": {
+        "total_2025": 550.0,
+        "career_earnings": 1455.0,
+        "earnings_rank": 504.0,
+        "card_tier": "Standard",
+        "pd_events": 1.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 600.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "jalina-ingram",
+      "player": "Jalina Ingram",
+      "team": "Chicago Slice",
+      "pick_no": 32,
+      "gender": "Female",
+      "actual": 35000,
+      "predicted": 14824,
+      "predicted_lo": 3049,
+      "predicted_hi": 72084,
+      "predicted_oof": 15686,
+      "residual_log": -0.8590911790769642,
+      "residual_log_oof": -0.8025971351568728,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 7.796469243086058
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.06447565233267817
+      },
+      "display": {
+        "total_2025": 2431.0,
+        "career_earnings": 10286.0,
+        "earnings_rank": 202.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2044.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "luca-mack",
+      "player": "Luca Mack",
+      "team": "Texas Ranchers",
+      "pick_no": 33,
+      "gender": "Male",
+      "actual": 26000,
+      "predicted": 7724,
+      "predicted_lo": 1588,
+      "predicted_hi": 37560,
+      "predicted_oof": 7486,
+      "residual_log": -1.2137412259886275,
+      "residual_log_oof": -1.2451148633476574,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 1.0,
+        "log_total_2025": 8.178919332848396
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": 0.048164929094769944
+      },
+      "display": {
+        "total_2025": 3564.0,
+        "career_earnings": 3810.0,
+        "earnings_rank": 334.0,
+        "card_tier": null,
+        "pd_events": 1.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 63.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "donald-young",
+      "player": "Donald Young",
+      "team": "Atlanta Bouncers",
+      "pick_no": 34,
+      "gender": "Male",
+      "actual": 24000,
+      "predicted": 8909,
+      "predicted_lo": 1832,
+      "predicted_hi": 43321,
+      "predicted_oof": 9453,
+      "residual_log": -0.9909862287433953,
+      "residual_log_oof": -0.9317354196395868,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 4.0,
+        "log_total_2025": 8.024534871605695
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.07638299189919463,
+        "log_total_2025": 0.05474911429166211
+      },
+      "display": {
+        "total_2025": 3054.0,
+        "career_earnings": 14939.0,
+        "earnings_rank": 170.0,
+        "card_tier": "Standard",
+        "pd_events": 4.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1191.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "michael-loyd",
+      "player": "Michael Loyd",
+      "team": "California Black Bears",
+      "pick_no": 35,
+      "gender": "Male",
+      "actual": 21000,
+      "predicted": 9822,
+      "predicted_lo": 2020,
+      "predicted_hi": 47759,
+      "predicted_oof": 10142,
+      "residual_log": -0.759920587320476,
+      "residual_log_oof": -0.727807504445348,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 9.0,
+        "log_total_2025": 11.057408396963119
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": 0.15049718205880921,
+        "log_total_2025": -0.07459681086794379
+      },
+      "display": {
+        "total_2025": 63411.0,
+        "career_earnings": 184411.0,
+        "earnings_rank": 92.0,
+        "card_tier": "Standard",
+        "pd_events": 9.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1868.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "gabriel-joseph",
+      "player": "Gabriel Joseph",
+      "team": "Los Angeles Mad Drops",
+      "pick_no": 36,
+      "gender": "Male",
+      "actual": 18000,
+      "predicted": 14436,
+      "predicted_lo": 2969,
+      "predicted_hi": 70197,
+      "predicted_oof": 14970,
+      "residual_log": -0.22064123395384705,
+      "residual_log_oof": -0.1843250582825604,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 3.0,
+        "pd_events": 5.0,
+        "log_total_2025": 8.995412975433313
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": 0.013343125711248882
+      },
+      "display": {
+        "total_2025": 8065.0,
+        "career_earnings": 21015.0,
+        "earnings_rank": 155.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1908.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "emma-nelson",
+      "player": "Emma Nelson",
+      "team": "California Black Bears",
+      "pick_no": 37,
+      "gender": "Female",
+      "actual": 21000,
+      "predicted": 17210,
+      "predicted_lo": 3539,
+      "predicted_hi": 83688,
+      "predicted_oof": 18976,
+      "residual_log": -0.1990058927139291,
+      "residual_log_oof": -0.10133038056605415,
+      "features": {
+        "pd_doubles_mean": 1.3333333333333333,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 5.62040086571715
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.13274930048007752,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.15728056988959252
+      },
+      "display": {
+        "total_2025": 275.0,
+        "career_earnings": 3421.0,
+        "earnings_rank": 354.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.3333333333333333,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1438.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "wyatt-stone",
+      "player": "Wyatt Stone",
+      "team": "Phoenix Flames",
+      "pick_no": 38,
+      "gender": "Male",
+      "actual": 18000,
+      "predicted": 25832,
+      "predicted_lo": 5312,
+      "predicted_hi": 125609,
+      "predicted_oof": 28095,
+      "residual_log": 0.36122946010473456,
+      "residual_log_oof": 0.44523424437754144,
+      "features": {
+        "pd_doubles_mean": 1.625,
+        "pd_round_max": 3.0,
+        "pd_events": 8.0,
+        "log_total_2025": 8.471777327885755
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.06484230716037798,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": 0.10512114726720843,
+        "log_total_2025": 0.0356751275940528
+      },
+      "display": {
+        "total_2025": 4777.0,
+        "career_earnings": 25653.0,
+        "earnings_rank": 142.0,
+        "card_tier": "Standard",
+        "pd_events": 8.0,
+        "pd_doubles_mean": 1.625,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 5145.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "victoria-dimuzio",
+      "player": "Victoria Di Muzio",
+      "team": "Utah Black Diamonds",
+      "pick_no": 39,
+      "gender": "Female",
+      "actual": 17000,
+      "predicted": 12071,
+      "predicted_lo": 2482,
+      "predicted_hi": 58696,
+      "predicted_oof": 11798,
+      "residual_log": -0.3424234291351471,
+      "residual_log_oof": -0.3653072573127538,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 1.0,
+        "log_total_2025": 7.294377299288821
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": 0.08588885879930289
+      },
+      "display": {
+        "total_2025": 1471.0,
+        "career_earnings": 5702.0,
+        "earnings_rank": 266.0,
+        "card_tier": "Standard",
+        "pd_events": 1.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 200.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "alex-walker",
+      "player": "Alex Walker",
+      "team": "Orlando Squeeze",
+      "pick_no": 40,
+      "gender": "Female",
+      "actual": 11000,
+      "predicted": 16111,
+      "predicted_lo": 3313,
+      "predicted_hi": 78342,
+      "predicted_oof": 16600,
+      "residual_log": 0.38161083209988433,
+      "residual_log_oof": 0.4115234471221605,
+      "features": {
+        "pd_doubles_mean": 1.6,
+        "pd_round_max": 2.0,
+        "pd_events": 5.0,
+        "log_total_2025": 10.34019289638035
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.047905883648339004,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": -0.044009019558461024
+      },
+      "display": {
+        "total_2025": 30951.0,
+        "career_earnings": 84720.0,
+        "earnings_rank": 111.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.6,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 3220.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "tom-protzek",
+      "player": "Tom Protzek",
+      "team": "Chicago Slice",
+      "pick_no": 41,
+      "gender": "Male",
+      "actual": 17000,
+      "predicted": 15034,
+      "predicted_lo": 3092,
+      "predicted_hi": 73103,
+      "predicted_oof": 14408,
+      "residual_log": -0.12292471082629675,
+      "residual_log_oof": -0.16546302787449285,
+      "features": {
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 2.0,
+        "pd_events": 7.0,
+        "log_total_2025": 7.73718007783463
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.2230768925442857,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.059745112475607674,
+        "log_total_2025": 0.06700421538262698
+      },
+      "display": {
+        "total_2025": 2291.0,
+        "career_earnings": 7379.0,
+        "earnings_rank": 237.0,
+        "card_tier": "Standard",
+        "pd_events": 7.0,
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2379.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "imani-phillips",
+      "player": "Alli Phillips",
+      "team": "Columbus Sliders",
+      "pick_no": 42,
+      "gender": "Female",
+      "actual": 15000,
+      "predicted": 15465,
+      "predicted_lo": 3180,
+      "predicted_hi": 75202,
+      "predicted_oof": 14456,
+      "residual_log": 0.030554588098288704,
+      "residual_log_oof": -0.03691559000965405,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 6.803505257608338
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.10682355912072963
+      },
+      "display": {
+        "total_2025": 900.0,
+        "career_earnings": 900.0,
+        "earnings_rank": 621.0,
+        "card_tier": null,
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "clayton-powell",
+      "player": "Clayton Powell",
+      "team": "Miami Pickleball Club",
+      "pick_no": 44,
+      "gender": "Male",
+      "actual": 11000,
+      "predicted": 14083,
+      "predicted_lo": 2896,
+      "predicted_hi": 68478,
+      "predicted_oof": 13869,
+      "residual_log": 0.24704442516096137,
+      "residual_log_oof": 0.23178013801143393,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 8.999742789830492
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.013158467879562171
+      },
+      "display": {
+        "total_2025": 8100.0,
+        "career_earnings": 11847.0,
+        "earnings_rank": 191.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "matthew-barlow",
+      "player": "Matthew Barlow",
+      "team": "Brooklyn Pickleball Club",
+      "pick_no": 45,
+      "gender": "Male",
+      "actual": 11000,
+      "predicted": 18628,
+      "predicted_lo": 3831,
+      "predicted_hi": 90580,
+      "predicted_oof": 21683,
+      "residual_log": 0.5267666748604611,
+      "residual_log_oof": 0.6786415684422806,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 4.0,
+        "pd_events": 2.0,
+        "log_total_2025": 5.438079308923196
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": 0.33907412058966196,
+        "pd_events": -0.16713506148239618,
+        "log_total_2025": 0.1650562157392738
+      },
+      "display": {
+        "total_2025": 229.0,
+        "career_earnings": 4054.0,
+        "earnings_rank": 311.0,
+        "card_tier": null,
+        "pd_events": 2.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 4.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 1.0,
+        "pd_prize": 1132.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "alexa-schull",
+      "player": "Alexa Schull",
+      "team": "Phoenix Flames",
+      "pick_no": 46,
+      "gender": "Female",
+      "actual": 11000,
+      "predicted": 14154,
+      "predicted_lo": 2911,
+      "predicted_hi": 68823,
+      "predicted_oof": 15383,
+      "residual_log": 0.2520669754817799,
+      "residual_log_oof": 0.335352646880855,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 8.881975184248867
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.01818101820038098
+      },
+      "display": {
+        "total_2025": 7200.0,
+        "career_earnings": 9104.0,
+        "earnings_rank": 210.0,
+        "card_tier": null,
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "zoey-weil",
+      "player": "Zoey Weil",
+      "team": "Florida Smash",
+      "pick_no": 47,
+      "gender": null,
+      "actual": 10000,
+      "predicted": 17217,
+      "predicted_lo": 3541,
+      "predicted_hi": 83719,
+      "predicted_oof": 19309,
+      "residual_log": 0.5433067186415013,
+      "residual_log_oof": 0.6579833660966123,
+      "features": {
+        "pd_doubles_mean": 1.4,
+        "pd_round_max": 2.0,
+        "pd_events": 7.0,
+        "log_total_2025": 7.734558844354756
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.08758550444797343,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.059745112475607674,
+        "log_total_2025": 0.0671160056919422
+      },
+      "display": {
+        "total_2025": 2285.0,
+        "career_earnings": 8593.0,
+        "earnings_rank": 220.0,
+        "card_tier": "Standard",
+        "pd_events": 7.0,
+        "pd_doubles_mean": 1.4,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2284.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "genie-erokhina",
+      "player": "Genie Erokhina",
+      "team": "Bay Area Breakers",
+      "pick_no": 48,
+      "gender": "Female",
+      "actual": 11000,
+      "predicted": 29057,
+      "predicted_lo": 5976,
+      "predicted_hi": 141294,
+      "predicted_oof": 30152,
+      "residual_log": 0.9713722993006435,
+      "residual_log_oof": 1.0083684195418474,
+      "features": {
+        "pd_doubles_mean": 1.7142857142857142,
+        "pd_round_max": 4.0,
+        "pd_events": 7.0,
+        "log_total_2025": 11.679227728625255
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.12532953398908878,
+        "pd_round_max": 0.33907412058966196,
+        "pd_events": 0.059745112475607674,
+        "log_total_2025": -0.10111614840823512
+      },
+      "display": {
+        "total_2025": 118092.0,
+        "career_earnings": 339703.0,
+        "earnings_rank": 61.0,
+        "card_tier": "Standard",
+        "pd_events": 7.0,
+        "pd_doubles_mean": 1.7142857142857142,
+        "pd_round_max": 4.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 1.0,
+        "pd_prize": 6071.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "luc-pham",
+      "player": "Luc Pham",
+      "team": "Bay Area Breakers",
+      "pick_no": 49,
+      "gender": "Male",
+      "actual": 9000,
+      "predicted": 12141,
+      "predicted_lo": 2497,
+      "predicted_hi": 59035,
+      "predicted_oof": 11998,
+      "residual_log": 0.2993384791304283,
+      "residual_log_oof": 0.28747789335801954,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 2.0,
+        "pd_events": 5.0,
+        "log_total_2025": 7.443663683115591
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": 0.07952209629886861
+      },
+      "display": {
+        "total_2025": 1708.0,
+        "career_earnings": 5440.0,
+        "earnings_rank": 276.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1624.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "alexander-crum",
+      "player": "Alex Crum",
+      "team": "Columbus Sliders",
+      "pick_no": 50,
+      "gender": "Male",
+      "actual": 9000,
+      "predicted": 13232,
+      "predicted_lo": 2721,
+      "predicted_hi": 64343,
+      "predicted_oof": 14315,
+      "residual_log": 0.3854314431436219,
+      "residual_log_oof": 0.4640826582809279,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 10.46015614461037
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": -0.04912520959992829
+      },
+      "display": {
+        "total_2025": 34896.0,
+        "career_earnings": 101862.0,
+        "earnings_rank": 103.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "ava-cavataio",
+      "player": "Ava Cavataio",
+      "team": "Texas Ranchers",
+      "pick_no": 51,
+      "gender": "Female",
+      "actual": 10000,
+      "predicted": 15735,
+      "predicted_lo": 3236,
+      "predicted_hi": 76512,
+      "predicted_oof": 14472,
+      "residual_log": 0.4532883029936077,
+      "residual_log_oof": 0.36963772856805477,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 6.398594934535208
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.12409216590788431
+      },
+      "display": {
+        "total_2025": 600.0,
+        "career_earnings": 600.0,
+        "earnings_rank": 709.0,
+        "card_tier": null,
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "yates-johnson",
+      "player": "Yates Johnson",
+      "team": "Orlando Squeeze",
+      "pick_no": 52,
+      "gender": "Male",
+      "actual": 7000,
+      "predicted": 9848,
+      "predicted_lo": 2025,
+      "predicted_hi": 47889,
+      "predicted_oof": 9457,
+      "residual_log": 0.3414086970261412,
+      "residual_log_oof": 0.3008331637048123,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 6.0,
+        "log_total_2025": 7.801800401908973
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.06424828918536676
+      },
+      "display": {
+        "total_2025": 2444.0,
+        "career_earnings": 30729.0,
+        "earnings_rank": 135.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1092.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "christopher-crouch",
+      "player": "Chris Crouch",
+      "team": "Florida",
+      "pick_no": 53,
+      "gender": "Male",
+      "actual": 5000,
+      "predicted": 8052,
+      "predicted_lo": 1656,
+      "predicted_hi": 39154,
+      "predicted_oof": 8931,
+      "residual_log": 0.4764893714243499,
+      "residual_log_oof": 0.5800923299377754,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 1.0,
+        "log_total_2025": 7.20414929203594
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": 0.08973690092036568
+      },
+      "display": {
+        "total_2025": 1344.0,
+        "career_earnings": 4588.0,
+        "earnings_rank": 298.0,
+        "card_tier": "Standard",
+        "pd_events": 1.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 600.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "aiko-yoshitomi",
+      "player": "Aiko Yoshitomi",
+      "team": "Miami Pickleball Club",
+      "pick_no": 54,
+      "gender": "Female",
+      "actual": 4000,
+      "predicted": 13989,
+      "predicted_lo": 2877,
+      "predicted_hi": 68024,
+      "predicted_oof": 15183,
+      "residual_log": 1.251986221911734,
+      "residual_log_oof": 1.3338539043865527,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 6.0,
+        "log_total_2025": 9.155884186180124
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.0064993529518548735
+      },
+      "display": {
+        "total_2025": 9469.0,
+        "career_earnings": 10621.0,
+        "earnings_rank": 199.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2246.0,
+        "has_results": 0,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "ivan-jakovljevic",
+      "player": "Ivan Jakovljevic",
+      "team": "Dallas Flash",
+      "pick_no": 56,
+      "gender": "Male",
+      "actual": 4000,
+      "predicted": 10956,
+      "predicted_lo": 2253,
+      "predicted_hi": 53277,
+      "predicted_oof": 13803,
+      "residual_log": 1.0076317761174636,
+      "residual_log_oof": 1.2385946717798362,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 10.0,
+        "log_total_2025": 9.557964480394498
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": 0.19587321685040998,
+        "log_total_2025": -0.010648558825137412
+      },
+      "display": {
+        "total_2025": 14156.0,
+        "career_earnings": 55169.0,
+        "earnings_rank": 122.0,
+        "card_tier": "Standard",
+        "pd_events": 10.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2678.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "samantha-parker",
+      "player": "Samantha Parker",
+      "team": "Dallas Flash",
+      "pick_no": 57,
+      "gender": "Female",
+      "actual": 5000,
+      "predicted": 17485,
+      "predicted_lo": 3596,
+      "predicted_hi": 85024,
+      "predicted_oof": 20959,
+      "residual_log": 1.2519154151639214,
+      "residual_log_oof": 1.433139447833895,
+      "features": {
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 2.0,
+        "pd_events": 1.0,
+        "log_total_2025": 10.519132545566643
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.3188886598409636,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": -0.051640433884915286
+      },
+      "display": {
+        "total_2025": 37016.0,
+        "career_earnings": 119682.0,
+        "earnings_rank": 98.0,
+        "card_tier": "Standard",
+        "pd_events": 1.0,
+        "pd_doubles_mean": 2.0,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1200.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "martin-emmrich",
+      "player": "Martin Emmrich",
+      "team": "New Jersey 5s",
+      "pick_no": 58,
+      "gender": "Male",
+      "actual": 2000,
+      "predicted": 21381,
+      "predicted_lo": 4397,
+      "predicted_hi": 103970,
+      "predicted_oof": 23575,
+      "residual_log": 2.3693764459358793,
+      "residual_log_oof": 2.46704157490381,
+      "features": {
+        "pd_doubles_mean": 1.6666666666666667,
+        "pd_round_max": 3.0,
+        "pd_events": 6.0,
+        "log_total_2025": 11.439160510902152
+      },
+      "contributions": {
+        "pd_doubles_mean": 0.0930696796804431,
+        "pd_round_max": 0.09972768252637114,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": -0.09087776684788704
+      },
+      "display": {
+        "total_2025": 92888.0,
+        "career_earnings": 286560.0,
+        "earnings_rank": 68.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.6666666666666667,
+        "pd_round_max": 3.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 3938.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "tyler-loong",
+      "player": "Tyler Loong",
+      "team": "Utah Black Diamonds",
+      "pick_no": 59,
+      "gender": "Male",
+      "actual": 2000,
+      "predicted": 11169,
+      "predicted_lo": 2297,
+      "predicted_hi": 54310,
+      "predicted_oof": 9879,
+      "residual_log": 1.719981812059764,
+      "residual_log_oof": 1.5972271077872762,
+      "features": {
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 2.0,
+        "pd_events": 5.0,
+        "log_total_2025": 12.576977364287115
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.2230768925442857,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": -0.13940335564438178
+      },
+      "display": {
+        "total_2025": 289808.0,
+        "career_earnings": 823931.0,
+        "earnings_rank": 38.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2195.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "tamaryn-emmrich",
+      "player": "Tamaryn Emmrich",
+      "team": "Palm Beach Royals",
+      "pick_no": 60,
+      "gender": "Female",
+      "actual": 2000,
+      "predicted": 9917,
+      "predicted_lo": 2039,
+      "predicted_hi": 48220,
+      "predicted_oof": 10923,
+      "residual_log": 1.6010535138489512,
+      "residual_log_oof": 1.6977424960808918,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 5.0,
+        "log_total_2025": 6.576469569048224
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": -0.031006957107593873,
+        "log_total_2025": 0.11650617230440839
+      },
+      "display": {
+        "total_2025": 717.0,
+        "career_earnings": 16384.0,
+        "earnings_rank": 164.0,
+        "card_tier": "Standard",
+        "pd_events": 5.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1764.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "keilly-ulery",
+      "player": "Keilly Ulery",
+      "team": "Atlanta Bouncers",
+      "pick_no": 61,
+      "gender": "Female",
+      "actual": 2000,
+      "predicted": 12153,
+      "predicted_lo": 2499,
+      "predicted_hi": 59096,
+      "predicted_oof": 13329,
+      "residual_log": 1.8044445089681638,
+      "residual_log_oof": 1.8967868480600725,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 1.0,
+        "log_total_2025": 7.134890851565884
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.21251109627399697,
+        "log_total_2025": 0.09269063340634369
+      },
+      "display": {
+        "total_2025": 1254.0,
+        "career_earnings": 6146.0,
+        "earnings_rank": 260.0,
+        "card_tier": "Standard",
+        "pd_events": 1.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 152.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "grayson-goldin",
+      "player": "Grayson Goldin",
+      "team": "Palm Beach Royals",
+      "pick_no": 63,
+      "gender": "Male",
+      "actual": 1000,
+      "predicted": 14371,
+      "predicted_lo": 2955,
+      "predicted_hi": 69882,
+      "predicted_oof": 15889,
+      "residual_log": 2.6652356814013256,
+      "residual_log_oof": 2.7656222977539198,
+      "features": {
+        "pd_doubles_mean": 1.5,
+        "pd_round_max": 2.0,
+        "pd_events": 4.0,
+        "log_total_2025": 10.367127224695365
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.01983981039981721,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": -0.07638299189919463,
+        "log_total_2025": -0.04515771421563358
+      },
+      "display": {
+        "total_2025": 31796.0,
+        "career_earnings": 83330.0,
+        "earnings_rank": 112.0,
+        "card_tier": "Standard",
+        "pd_events": 4.0,
+        "pd_doubles_mean": 1.5,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 1960.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "lina-padegimaite",
+      "player": "Lina Padegimaite",
+      "team": "New Jersey 5s",
+      "pick_no": 64,
+      "gender": "Female",
+      "actual": 1000,
+      "predicted": 12496,
+      "predicted_lo": 2570,
+      "predicted_hi": 60762,
+      "predicted_oof": 14241,
+      "residual_log": 2.525391562032633,
+      "residual_log_oof": 2.656098714454661,
+      "features": {
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 2.0,
+        "pd_events": 7.0,
+        "log_total_2025": 12.072604108073081
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.2230768925442857,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.059745112475607674,
+        "log_total_2025": -0.11789285581466045
+      },
+      "display": {
+        "total_2025": 175010.0,
+        "career_earnings": 505512.0,
+        "earnings_rank": 53.0,
+        "card_tier": "Standard",
+        "pd_events": 7.0,
+        "pd_doubles_mean": 1.2,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 3033.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "brandon-french",
+      "player": "Brandon French",
+      "team": "Carolina Hogs",
+      "pick_no": 65,
+      "gender": "Male",
+      "actual": 1000,
+      "predicted": 9595,
+      "predicted_lo": 1973,
+      "predicted_hi": 46658,
+      "predicted_oof": 9641,
+      "residual_log": 2.261273780217733,
+      "residual_log_oof": 2.2660202013215116,
+      "features": {
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_events": 6.0,
+        "log_total_2025": 8.412499120301572
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.358568280640598,
+        "pd_round_max": -0.3789651936002105,
+        "pd_events": 0.0143690776840069,
+        "log_total_2025": 0.03820322332164361
+      },
+      "display": {
+        "total_2025": 4502.0,
+        "career_earnings": 12446.0,
+        "earnings_rank": 186.0,
+        "card_tier": "Standard",
+        "pd_events": 6.0,
+        "pd_doubles_mean": 1.0,
+        "pd_round_max": 1.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2013.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    },
+    {
+      "player_key": "isabella-dunlap",
+      "player": "Isabella Dunlap",
+      "team": "Carolina Hogs",
+      "pick_no": 66,
+      "gender": "Female",
+      "actual": 1000,
+      "predicted": 16214,
+      "predicted_lo": 3334,
+      "predicted_hi": 78842,
+      "predicted_oof": 17859,
+      "residual_log": 2.7858669906318525,
+      "residual_log_oof": 2.882504757008663,
+      "features": {
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_events": 8.0,
+        "log_total_2025": 7.823245690685523
+      },
+      "contributions": {
+        "pd_doubles_mean": -0.1892040455202076,
+        "pd_round_max": -0.1396187555369197,
+        "pd_events": 0.10512114726720843,
+        "log_total_2025": 0.06333369096888133
+      },
+      "display": {
+        "total_2025": 2497.0,
+        "career_earnings": 8813.0,
+        "earnings_rank": 216.0,
+        "card_tier": "Standard",
+        "pd_events": 8.0,
+        "pd_doubles_mean": 1.25,
+        "pd_round_max": 2.0,
+        "pd_titles": 0.0,
+        "pd_podiums": 0.0,
+        "pd_prize": 2668.0,
+        "has_results": 1,
+        "imputed_total_2025": false
+      }
+    }
+  ]
+}

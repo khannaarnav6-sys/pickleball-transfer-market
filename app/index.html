@@ -1,0 +1,1000 @@
+<title>Pickleball Transfer Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #eaefef;
+    --panel: #ffffff;
+    --panel-2: #f3f7f7;
+    --ink: #11201f;
+    --ink-2: #394a49;
+    --muted: #5a6b6a;
+    --line: #d3dedc;
+    --line-strong: #b9c9c6;
+    --under: #0e74b8;        /* bargain: modeled above what they went for */
+    --over: #bf4a2b;         /* overpay: modeled below what they went for */
+    --under-wash: #0e74b81f;
+    --over-wash: #bf4a2b1f;
+    --kitchen: #d9e021;      /* optic-yellow: the modeled == actual line */
+    --kitchen-ink: #6f6500;
+    --shadow: 0 1px 2px #11201f12, 0 8px 24px #11201f0a;
+
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --prose: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --figure: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0d1314;
+      --panel: #141a1c;
+      --panel-2: #1a2224;
+      --ink: #e9efee;
+      --ink-2: #c2d0ce;
+      --muted: #8fa3a1;
+      --line: #263134;
+      --line-strong: #37464a;
+      --under: #3f9ada;
+      --over: #dd7246;
+      --under-wash: #3f9ada26;
+      --over-wash: #dd724626;
+      --kitchen: #d9e021;
+      --kitchen-ink: #cdd531;
+      --shadow: 0 1px 2px #0006, 0 8px 24px #0004;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0d1314;
+    --panel: #141a1c;
+    --panel-2: #1a2224;
+    --ink: #e9efee;
+    --ink-2: #c2d0ce;
+    --muted: #8fa3a1;
+    --line: #263134;
+    --line-strong: #37464a;
+    --under: #3f9ada;
+    --over: #dd7246;
+    --under-wash: #3f9ada26;
+    --over-wash: #dd724626;
+    --kitchen: #d9e021;
+    --kitchen-ink: #cdd531;
+    --shadow: 0 1px 2px #0006, 0 8px 24px #0004;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 16px/1.6 var(--prose);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1000px; margin: 0 auto;
+    padding-block: 28px 56px; padding-left: 20px; padding-right: 20px;
+  }
+  @media (max-width: 460px) { .wrap { padding-left: 16px; padding-right: 16px; } }
+
+  h1, h2, h3, .lbl, th, button, input, select { font-family: var(--display); }
+  h1 { font-size: clamp(27px, 6.4vw, 42px); font-weight: 700; letter-spacing: -0.021em;
+       line-height: 1.04; margin: 0; text-wrap: balance; }
+  h2 { font-size: 19px; font-weight: 600; letter-spacing: -0.009em; margin: 0; }
+  h3 { font-size: 14px; font-weight: 600; margin: 0; }
+  p { margin: 0; }
+  .num { font-family: var(--figure); font-variant-numeric: tabular-nums; }
+  .lbl {
+    font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  a { color: var(--under); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  :focus-visible { outline: 2.5px solid var(--kitchen-ink); outline-offset: 2px; border-radius: 3px; }
+
+  /* ---- masthead ---- */
+  .mast { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .ball {
+    width: 13px; height: 13px; border-radius: 50%; background: var(--kitchen);
+    box-shadow: inset 0 0 0 2.5px #0000002e; flex: none;
+  }
+  .sub { font-size: 16.5px; color: var(--ink-2); max-width: 64ch; }
+  .sub b { font-weight: 600; }
+
+  /* ---- the verdict ---- */
+  .verdict {
+    margin-top: 26px; background: var(--panel); border: 1px solid var(--line);
+    border-left: 3px solid var(--over); border-radius: 3px;
+    padding: 17px 19px; display: flex; flex-direction: column; gap: 9px;
+    box-shadow: var(--shadow);
+  }
+  .verdict p { font-size: 15.5px; color: var(--ink-2); max-width: 70ch; }
+  .verdict strong { color: var(--ink); font-weight: 600; }
+
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+           background: var(--line); border: 1px solid var(--line);
+           border-radius: 3px; overflow: hidden; margin-top: 18px; }
+  @media (max-width: 680px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+  .tile { background: var(--panel); padding: 13px 15px 15px; display: flex;
+          flex-direction: column; gap: 3px; }
+  .tile .v { font-family: var(--figure); font-size: 23px; font-weight: 500;
+             font-variant-numeric: tabular-nums; letter-spacing: -0.02em; line-height: 1.1; }
+  .tile .n { font-size: 12.5px; color: var(--muted); font-family: var(--display); line-height: 1.35; }
+
+  section { margin-top: 46px; }
+  .shead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+           padding-bottom: 9px; border-bottom: 1.5px solid var(--line-strong); margin-bottom: 18px; }
+  .shead p { font-size: 14px; color: var(--muted); font-family: var(--display); }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 3px;
+           box-shadow: var(--shadow); }
+
+  /* ---- lookup ---- */
+  .searchrow { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+  .field { display: flex; flex-direction: column; gap: 5px; flex: 1 1 260px; min-width: 0; }
+  select, input[type="search"] {
+    font-size: 15px; font-weight: 500; padding: 9px 11px; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--line-strong); border-radius: 3px;
+    width: 100%; min-width: 0;
+  }
+  .hint { font-size: 13px; color: var(--muted); font-family: var(--display); }
+
+  /* ---- valuation card ---- */
+  .card { margin-top: 16px; padding: 0; overflow: hidden; }
+  .card-top { padding: 18px 20px; border-bottom: 1px solid var(--line);
+              display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+  .card-id { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .card-id .nm { font-family: var(--display); font-size: 25px; font-weight: 700;
+                 letter-spacing: -0.018em; line-height: 1.12; }
+  .card-id .mt { font-size: 13.5px; color: var(--muted); font-family: var(--display); }
+  .chip { align-self: flex-start; font-family: var(--display); font-size: 11.5px;
+          font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+          padding: 4px 9px; border-radius: 2px; border: 1px solid currentColor; white-space: nowrap; }
+  .chip.under { color: var(--under); background: var(--under-wash); }
+  .chip.over { color: var(--over); background: var(--over-wash); }
+  .chip.flat { color: var(--muted); background: transparent; }
+
+  .twoup { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
+  @media (max-width: 560px) { .twoup { grid-template-columns: 1fr; } }
+  .cell { background: var(--panel); padding: 16px 20px 18px; display: flex;
+          flex-direction: column; gap: 5px; }
+  .big { font-family: var(--figure); font-size: 29px; font-weight: 500;
+         font-variant-numeric: tabular-nums; letter-spacing: -0.025em; line-height: 1.08; }
+  .band { font-family: var(--figure); font-size: 12.5px; color: var(--muted);
+          font-variant-numeric: tabular-nums; }
+
+  .bars { padding: 18px 20px 20px; border-top: 1px solid var(--line); }
+  .bar-row { display: grid; grid-template-columns: 1fr 150px 86px; gap: 12px;
+             align-items: center; padding: 7px 0; }
+  @media (max-width: 560px) { .bar-row { grid-template-columns: 1fr 86px; }
+                              .bar-row .track { display: none; } }
+  .bar-lbl { font-family: var(--display); font-size: 13.5px; font-weight: 500;
+             overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .track { position: relative; height: 15px; background: var(--panel-2);
+           border-radius: 2px; overflow: hidden; }
+  .track .mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+                background: var(--line-strong); }
+  .track .fill { position: absolute; top: 3px; bottom: 3px; border-radius: 2px; }
+  .bar-val { font-family: var(--figure); font-size: 13px; text-align: right;
+             font-variant-numeric: tabular-nums; }
+  .pos { color: var(--under); } .neg { color: var(--over); }
+
+  /* ---- what-if ---- */
+  .whatif { padding: 18px 20px 20px; border-top: 1px solid var(--line); background: var(--panel-2); }
+  .wi-grid { display: grid; gap: 14px; margin-top: 12px; }
+  .wi-row { display: grid; grid-template-columns: 1fr 190px; gap: 8px 14px; align-items: center; }
+  @media (max-width: 560px) { .wi-row { grid-template-columns: 1fr; } }
+  .wi-name { font-family: var(--display); font-size: 13.5px; font-weight: 500;
+             display: flex; justify-content: space-between; gap: 10px; }
+  .wi-name span:last-child { font-family: var(--figure); color: var(--under); font-weight: 500; }
+  input[type="range"] { width: 100%; accent-color: var(--under); margin: 0; }
+  .toggle { display: flex; gap: 6px; }
+  .toggle button { font-size: 12.5px; font-weight: 600; padding: 5px 12px; cursor: pointer;
+    border: 1px solid var(--line-strong); background: var(--panel); color: var(--ink-2);
+    border-radius: 2px; }
+  .toggle button[aria-pressed="true"] { background: var(--ink); color: var(--panel);
+    border-color: var(--ink); }
+  .wi-out { display: flex; align-items: baseline; gap: 10px; margin-top: 15px;
+            padding-top: 14px; border-top: 1px dashed var(--line-strong); flex-wrap: wrap; }
+  .wi-out .big { font-size: 24px; }
+  .reset { font-family: var(--display); font-size: 12.5px; font-weight: 600; cursor: pointer;
+    background: none; border: none; color: var(--under); padding: 4px 0; text-decoration: underline;
+    text-underline-offset: 2px; }
+
+  /* ---- tables ---- */
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 3px;
+            background: var(--panel); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-family: var(--figure); font-size: 13.5px;
+          font-variant-numeric: tabular-nums; min-width: 580px; }
+  th { font-family: var(--display); font-size: 10.5px; font-weight: 600; letter-spacing: 0.085em;
+       text-transform: uppercase; color: var(--muted); text-align: right;
+       padding: 10px 13px; border-bottom: 1.5px solid var(--line-strong); white-space: nowrap;
+       background: var(--panel); }
+  th:first-child, td:first-child { text-align: left; }
+  th.l, td.l { text-align: left; }
+  td { padding: 9px 13px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.sel td { background: var(--panel-2); }
+  td.name { font-family: var(--display); font-weight: 500; font-size: 14px; }
+  td.name button { font: inherit; color: inherit; background: none; border: none; padding: 0;
+                   cursor: pointer; text-align: left; }
+  td.name button:hover { color: var(--under); text-decoration: underline; }
+  .grp { font-family: var(--display); font-size: 11px; font-weight: 600; letter-spacing: 0.085em;
+         text-transform: uppercase; padding: 12px 13px 8px; color: var(--ink);
+         border-bottom: 1px solid var(--line-strong); background: var(--panel-2); }
+  .grp.u { color: var(--under); } .grp.o { color: var(--over); }
+
+  /* ---- charts ---- */
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .charts { grid-template-columns: 1fr; } }
+  figure { margin: 0; }
+  #why figure { max-width: 700px; margin-inline: auto; }
+  figcaption { font-family: var(--display); font-size: 13px; color: var(--muted);
+               margin-top: 9px; line-height: 1.45; }
+  figcaption b { color: var(--ink-2); font-weight: 600; }
+  .chart { position: relative; padding: 14px 14px 6px; }
+  .chart svg { display: block; width: 100%; height: auto; max-width: 100%; overflow: visible; }
+  .tip { position: absolute; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--ink); color: var(--panel); font-family: var(--figure); font-size: 11.5px;
+    padding: 6px 9px; border-radius: 3px; white-space: nowrap; z-index: 5;
+    transform: translate(-50%, -128%); line-height: 1.45; }
+  .tip.on { opacity: 1; }
+  .tip b { font-family: var(--display); font-size: 12px; display: block; }
+  .dot { cursor: pointer; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; padding: 0 14px 12px;
+            font-family: var(--display); font-size: 12.5px; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .sw.line { width: 15px; height: 0; border-top: 2.5px solid var(--kitchen); border-radius: 0; }
+
+  .prose { font-size: 15.5px; color: var(--ink-2); max-width: 68ch; }
+  .prose + .prose { margin-top: 11px; }
+  .prose b { color: var(--ink); font-weight: 600; }
+  .prose code { font-family: var(--figure); font-size: 13.5px; background: var(--panel-2);
+                padding: 1px 4px; border-radius: 2px; }
+
+  .notes { margin-top: 18px; display: grid; gap: 1px; background: var(--line);
+           border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+  .note { background: var(--panel); padding: 14px 17px; display: flex; gap: 13px; }
+  .note .k { font-family: var(--figure); font-size: 12px; color: var(--muted); flex: none;
+             padding-top: 2px; }
+  .note .t { font-size: 14.5px; color: var(--ink-2); }
+  .note .t b { color: var(--ink); font-weight: 600; }
+
+  footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line-strong);
+           font-size: 13.5px; color: var(--muted); display: flex; flex-direction: column; gap: 7px; }
+  .err { padding: 16px 19px; border-left: 3px solid var(--over); background: var(--panel);
+         border: 1px solid var(--line); border-radius: 3px; font-size: 15px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow">
+      <span class="ball" aria-hidden="true"></span>
+      <span class="lbl">Major League Pickleball &middot; 2026 auction draft</span>
+    </div>
+    <h1>Pickleball Transfer Market</h1>
+    <p class="sub" id="subtitle"></p>
+  </header>
+
+  <div id="boot"></div>
+
+  <div id="app" hidden>
+    <div class="verdict" id="verdict"></div>
+    <div class="tiles" id="tiles"></div>
+
+    <section id="lookup">
+      <div class="shead">
+        <h2>Look up a player</h2>
+        <p>Modeled value, the band around it, and what drives it</p>
+      </div>
+      <div class="searchrow">
+        <div class="field">
+          <label class="lbl" for="q">Search the 60 drafted players</label>
+          <input type="search" id="q" placeholder="Type a name &#x2014; Bright, Frazier, Loong&#x2026;"
+                 autocomplete="off" spellcheck="false">
+        </div>
+        <div class="field">
+          <label class="lbl" for="pick">Or choose from the list</label>
+          <select id="pick"></select>
+        </div>
+      </div>
+      <p class="hint" id="qhint"></p>
+      <div class="panel card" id="card"></div>
+    </section>
+
+    <section id="board">
+      <div class="shead">
+        <h2>Bargains &amp; overpays</h2>
+        <p>Ranked by how far the modeled value sits from what the team paid</p>
+      </div>
+      <p class="prose" id="boardnote"></p>
+      <div class="toggle" style="margin:14px 0 14px;">
+        <button id="t-ends" aria-pressed="true">Extremes</button>
+        <button id="t-all" aria-pressed="false">All 60</button>
+      </div>
+      <div class="scroll"><table id="residuals"></table></div>
+    </section>
+
+    <section id="why">
+      <div class="shead">
+        <h2>What the market priced</h2>
+        <p>Modeled value against what teams actually paid</p>
+      </div>
+      <p class="prose" id="whynote"></p>
+      <figure class="panel" style="margin-top:18px;">
+        <div class="chart" id="c-fit"></div>
+        <div class="legend">
+          <span><span class="sw line"></span> modeled = paid</span>
+          <span><span class="sw" style="background:var(--under)"></span> modeled above paid</span>
+          <span><span class="sw" style="background:var(--over)"></span> modeled below paid</span>
+        </div>
+        <figcaption style="padding:0 14px 14px;" id="fitcap"></figcaption>
+      </figure>
+    </section>
+
+    <section id="diag">
+      <div class="shead">
+        <h2>Residual diagnostics</h2>
+        <p>Where the error sits</p>
+      </div>
+      <div class="charts">
+        <figure class="panel">
+          <div class="chart" id="c-r1"></div>
+          <figcaption style="padding:0 14px 14px;" id="r1cap"></figcaption>
+        </figure>
+        <figure class="panel">
+          <div class="chart" id="c-r2"></div>
+          <figcaption style="padding:0 14px 14px;" id="r2cap"></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="coefs">
+      <div class="shead">
+        <h2>What the model learned</h2>
+        <p>Ridge coefficients, with OLS confidence intervals</p>
+      </div>
+      <div class="scroll"><table id="coeftable"></table></div>
+      <p class="prose" style="margin-top:14px;" id="coefnote"></p>
+    </section>
+
+    <section id="method">
+      <div class="shead">
+        <h2>Method &amp; caveats</h2>
+        <p>What went in, and what to distrust</p>
+      </div>
+      <p class="prose" id="methodnote"></p>
+      <div class="notes" id="caveats"></div>
+    </section>
+
+    <footer>
+      <p>Features from <a href="https://www.dinkbank.com" rel="noopener">DinkBank</a>
+         &#x2014; career earnings, UPA card tiers, and the per-bracket tournament results
+         that the form features are built from. Draft prices from published 2026 draft coverage.
+         Never sourced from DUPR directly &#x2014; their terms prohibit automated access.</p>
+      <p id="footnote"></p>
+    </footer>
+  </div>
+</div>
+
+<script>
+let DATA = null, M = null, SEL = null, WI = null, SHOW_ALL = false;
+
+const $ = (id) => document.getElementById(id);
+
+/* ---------- formatting ---------- */
+function fmtMoney(n) {
+  if (n == null || !isFinite(n)) return "\u2014";
+  if (n >= 1e6) return "$" + (n / 1e6).toFixed(2).replace(/\.?0+$/, "") + "M";
+  if (n >= 1e4) return "$" + Math.round(n / 1e3) + "K";
+  if (n >= 1e3) return "$" + (n / 1e3).toFixed(1).replace(/\.0$/, "") + "K";
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+const fmtExact = (n) => n == null ? "\u2014" : "$" + Math.round(n).toLocaleString("en-US");
+const fmtR2 = (v) => (v >= 0 ? "+" : "\u2212") + Math.abs(v).toFixed(3);
+
+/** A residual of +1.3 log dollars is a 3.7x gap. Multiples read; log dollars don't. */
+const gapX = (residLog) => Math.exp(Math.abs(residLog));
+function fmtGap(residLog) {
+  const x = gapX(residLog);
+  const s = x >= 10 ? Math.round(x) : x.toFixed(1);
+  return s + "\u00d7 " + (residLog > 0 ? "cheap" : "dear");
+}
+
+/* ---------- boot ---------- */
+async function loadData() {
+  try {
+    const res = await fetch("data.json");
+    if (!res.ok) throw new Error("data.json returned " + res.status);
+    DATA = await res.json();
+  } catch (err) {
+    $("boot").innerHTML = '<div class="err"><b>Could not load data.json.</b><br>' +
+      "The page needs it alongside index.html, served over http. Locally: " +
+      '<code>python3 -m http.server 8000 --directory app</code>, then open ' +
+      "localhost:8000. (" + String(err.message || err) + ")</div>";
+    $("subtitle").textContent = "Data failed to load.";
+    return;
+  }
+  M = DATA.model;
+  $("boot").hidden = true;
+  $("app").hidden = false;
+  renderHeader();
+  renderLookupControls();
+  // Open on the most expensive pick in the draft: a real working state.
+  select([...DATA.players].sort((a, b) => b.actual - a.actual)[0].player_key);
+  renderResiduals();
+  renderWhy();
+  renderCoefs();
+  renderMethod();
+}
+
+/* ---------- header, verdict, tiles ---------- */
+function renderHeader() {
+  const d = M.diagnostics, f = M.form;
+  $("subtitle").innerHTML =
+    "Soccer has Transfermarkt. Pickleball has something better: an <b>open auction</b> " +
+    "where teams bid real money. This fits a model to the " + M.n + " picks of the 2026 " +
+    "MLP draft using only what was knowable beforehand \u2014 chiefly <b>how each player " +
+    "was actually playing</b> in the weeks before draft day.";
+
+  const base = M.baselines.earnings_only;
+  $("verdict").innerHTML =
+    '<span class="lbl" style="color:var(--under)">The headline result</span>' +
+    "<p><strong>Recent doubles form predicts draft price; career earnings barely do.</strong> " +
+    "Cross-validated R\u00b2 is <strong>" + fmtR2(M.r2) + "</strong> \u2014 against " +
+    fmtR2(base.r2) + " for an earnings-only model and " + fmtR2(M.baselines.mean_only.r2) +
+    " for guessing the average. The single strongest feature is <strong>how deep a player " +
+    "ran in doubles brackets</strong> in the seven weeks before the draft, and it is the " +
+    "only term here whose confidence interval clears zero (p = 0.001).</p>" +
+    "<p>That fits the format: MLP starting fours are two men and two women playing <strong>team " +
+    "doubles</strong>, so teams bid on current doubling ability, not on career prize money. " +
+    "Earnings were the best public proxy available until on-court results were added; with " +
+    "form in the model, the earnings term stops carrying weight entirely.</p>" +
+    "<p><strong>It is still a 60-player model and the band is wide.</strong> Fold-to-fold R\u00b2 " +
+    "ranges from " + fmtR2(M.fold_r2_p10) + " to " + fmtR2(M.fold_r2_p90) + ". Read every " +
+    "figure as a <strong>modeled value</strong>, never a price.</p>";
+
+  const tiles = [
+    { v: String(M.n), n: "drafted players, 2026 only" },
+    { v: fmtR2(M.r2), n: "cross-validated R\u00b2 (was " + fmtR2(base.r2) + " on earnings alone)" },
+    { v: "$" + Math.round(d.predicted_spread_x) + "\u00d7", n: "modeled price spread, vs " +
+         Math.round(d.actual_spread_x) + "\u00d7 actually paid" },
+    { v: Math.round(Math.exp(M.band_z * M.resid_sd_log)) + "\u00d7",
+      n: M.band_label + " band width, multiplicative" },
+  ];
+  tiles[2].v = Math.round(d.predicted_spread_x) + "\u00d7";
+  $("tiles").innerHTML = tiles.map(t =>
+    '<div class="tile"><span class="v">' + t.v + '</span><span class="n">' + t.n +
+    "</span></div>").join("");
+}
+
+function renderLookupControls() {
+  const byPick = [...DATA.players].sort((a, b) => a.pick_no - b.pick_no);
+  $("pick").innerHTML = byPick.map(p =>
+    '<option value="' + p.player_key + '">#' + p.pick_no + " \u2014 " + p.player +
+    " (" + fmtMoney(p.actual) + ")</option>").join("");
+  $("pick").addEventListener("change", (e) => select(e.target.value));
+
+  $("q").addEventListener("input", (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) { $("qhint").textContent = ""; return; }
+    const hits = DATA.players.filter(p => p.player.toLowerCase().includes(q));
+    if (hits.length === 0) {
+      $("qhint").textContent = "No drafted player matches \u201c" + e.target.value +
+        "\u201d. Only the " + M.n + " players picked in the 2026 draft are modeled.";
+    } else {
+      $("qhint").textContent = hits.length === 1 ? "" :
+        hits.length + " matches \u2014 showing " + hits[0].player + ".";
+      select(hits[0].player_key, true);
+    }
+  });
+}
+
+function select(key, keepQuery) {
+  SEL = DATA.players.find(p => p.player_key === key);
+  if (!SEL) return;
+  WI = null;
+  $("pick").value = key;
+  if (!keepQuery) $("q").value = "";
+  renderCard();
+  document.querySelectorAll("#residuals tr.sel").forEach(tr => tr.classList.remove("sel"));
+  const row = document.querySelector('#residuals tr[data-k="' + key + '"]');
+  if (row) row.classList.add("sel");
+}
+
+/* The model, re-evaluated in the browser. Standardize, dot with the coefficients,
+   add the intercept. At a player's own values this reproduces `predicted` exactly. */
+function scoreLog(featureValues) {
+  let s = M.intercept;
+  for (const f of M.features) s += f.coef * ((featureValues[f.name] - f.mean) / f.std);
+  return s;
+}
+
+function renderCard() {
+  const p = SEL, d = p.display;
+  const dir = p.residual_log > 0 ? "under" : "over";
+  const verdict = Math.abs(p.residual_log) < 0.35 ? ["flat", "About right"]
+    : p.residual_log > 0 ? ["under", "Modeled cheap"] : ["over", "Modeled dear"];
+
+  const contribs = M.features.map(f => ({
+    label: f.label, v: p.contributions[f.name],
+  })).sort((a, b) => Math.abs(b.v) - Math.abs(a.v));
+  const maxAbs = Math.max(...contribs.map(c => Math.abs(c.v)), 0.001);
+
+  const meta = ["Pick #" + p.pick_no, p.team, p.gender || "gender not recorded"].join("  \u00b7  ");
+
+  const ladder = { 7: "Champion", 6: "Runner-up", 5: "3rd", 4: "4th / semis",
+                   3: "Quarterfinals", 2: "Round of 16", 1: "Round of 32" };
+  const best = d.pd_round_max == null ? null : ladder[Math.round(d.pd_round_max)];
+  const facts = [
+    ["Pre-draft brackets", d.has_results ? d.pd_events + " entered" : "none played, imputed"],
+    ["Doubles form (1-7)", d.pd_doubles_mean == null ? "-" : d.pd_doubles_mean.toFixed(2)],
+    ["Best finish", best ? best : "-"],
+    ["Titles / podiums", d.has_results ? (d.pd_titles || 0) + " / " + (d.pd_podiums || 0) : "-"],
+    ["Prize won pre-draft", d.pd_prize == null ? "-" : fmtExact(d.pd_prize)],
+    ["2025 earnings", d.total_2025 == null ? "not recorded" : fmtExact(d.total_2025) +
+      (d.imputed_total_2025 ? " (imputed)" : "")],
+    ["Career earnings", fmtExact(d.career_earnings)],
+    ["UPA card tier", d.card_tier || "none listed"],
+  ];
+
+  $("card").innerHTML =
+    '<div class="card-top"><div class="card-id">' +
+      '<span class="nm">' + esc(p.player) + "</span>" +
+      '<span class="mt">' + esc(meta) + "</span></div>" +
+      '<span class="chip ' + verdict[0] + '">' + verdict[1] + "</span></div>" +
+
+    '<div class="twoup">' +
+      '<div class="cell"><span class="lbl">What the team paid</span>' +
+        '<span class="big">' + fmtExact(p.actual) + "</span>" +
+        '<span class="band">pick #' + p.pick_no + " of 66</span></div>" +
+      '<div class="cell"><span class="lbl">Modeled value</span>' +
+        '<span class="big">' + fmtExact(p.predicted) + "</span>" +
+        '<span class="band">' + M.band_label + " band " + fmtMoney(p.predicted_lo) +
+        " \u2013 " + fmtMoney(p.predicted_hi) + "</span></div>" +
+    "</div>" +
+
+    '<div class="bars"><span class="lbl">What moves this valuation</span>' +
+      '<p class="hint" style="margin:6px 0 10px;">Each feature\u2019s push away from the ' +
+      "average player, in dollars. They multiply together to the modeled value above.</p>" +
+      contribs.map(c => {
+        const half = (Math.abs(c.v) / maxAbs) * 50;
+        const up = c.v >= 0;
+        return '<div class="bar-row"><span class="bar-lbl">' + esc(c.label) + "</span>" +
+          '<span class="track"><span class="mid"></span><span class="fill" style="' +
+            (up ? "left:50%" : "right:50%") + ";width:" + half.toFixed(2) + "%;background:" +
+            (up ? "var(--under)" : "var(--over)") + '"></span></span>' +
+          '<span class="bar-val ' + (up ? "pos" : "neg") + '">' + (up ? "\u00d7" : "\u00f7") +
+            Math.exp(Math.abs(c.v)).toFixed(2) + "</span></div>";
+      }).join("") +
+    "</div>" +
+
+    '<div class="bars" style="background:var(--panel-2)">' +
+      '<span class="lbl">On the record, before draft day</span>' +
+      '<div style="margin-top:10px;display:grid;gap:7px;">' +
+      facts.map(([k, v]) =>
+        '<div style="display:flex;justify-content:space-between;gap:14px;font-size:13.5px;">' +
+        '<span style="font-family:var(--display);color:var(--muted)">' + k + "</span>" +
+        '<span class="num" style="text-align:right">' + esc(String(v)) + "</span></div>").join("") +
+      "</div></div>" +
+
+    '<div class="whatif"><span class="lbl">What-if</span>' +
+      '<p class="hint" style="margin:6px 0 0;">Move a feature and watch the valuation ' +
+      "follow. Form runs 1 (lost in the Round of 32) to 7 (won the bracket). Sliders " +
+      "stop at the range actually observed in this draft \u2014 past that the " +
+      "model is guessing about players it never saw.</p>" +
+      '<div class="wi-grid" id="wi-grid"></div>' +
+      '<div class="wi-out" id="wi-out"></div></div>';
+
+  buildWhatIf();
+}
+
+function buildWhatIf() {
+  WI = { ...SEL.features };
+  $("wi-grid").innerHTML = M.features.map(f => {
+    const out = '<span class="wi-name"><span>' + esc(f.label) +
+      '</span><span class="num" data-out="' + f.name + '"></span></span>';
+    if (f.kind === "money" || f.kind === "linear") {
+      // Money slides in log space: linear dollars would spend most of the travel
+      // above $100k. The form features sit on a small linear scale already.
+      const money = f.kind === "money";
+      const lo = money ? Math.log1p(f.display_min) : f.display_min;
+      const hi = money ? Math.log1p(f.display_max) : f.display_max;
+      const val = Math.min(Math.max(WI[f.name], lo), hi);
+      const step = money ? (hi - lo) / 240 : (f.decimals ? 0.01 : 1);
+      return '<div class="wi-row">' + out + '<input type="range" id="wi-' + f.name +
+        '" data-f="' + f.name + '" min="' + lo + '" max="' + hi +
+        '" step="' + step + '" value="' + val +
+        '" aria-label="' + esc(f.label) + '"></div>';
+    }
+    return '<div class="wi-row">' + out + '<span class="toggle">' +
+      '<button type="button" id="wi-' + f.name + '-y" data-f="' + f.name +
+        '" data-v="1">Yes</button>' +
+      '<button type="button" id="wi-' + f.name + '-n" data-f="' + f.name +
+        '" data-v="0">No</button></span></div>';
+  }).join("");
+
+  $("wi-grid").querySelectorAll('input[type="range"]').forEach(el =>
+    el.addEventListener("input", syncWhatIf));
+  $("wi-grid").querySelectorAll("button[data-f]").forEach(b =>
+    b.addEventListener("click", () => {
+      WI[b.dataset.f] = parseFloat(b.dataset.v);
+      syncWhatIf();
+    }));
+
+  syncWhatIf();
+}
+
+/** Update readouts and the valuation from the live controls, leaving them in place. */
+function syncWhatIf() {
+  for (const f of M.features) {
+    const input = $("wi-" + f.name);
+    const slider = f.kind === "money" || f.kind === "linear";
+    // While dragging, the range input is the source of truth.
+    if (slider && input) WI[f.name] = parseFloat(input.value);
+
+    const out = $("wi-grid").querySelector('[data-out="' + f.name + '"]');
+    if (out) {
+      out.textContent = f.kind === "money" ? fmtMoney(Math.expm1(WI[f.name]))
+        : f.kind === "linear" ? WI[f.name].toFixed(f.decimals || 0)
+        : (WI[f.name] >= 0.5 ? "yes" : "no");
+    }
+    if (!slider) {
+      const y = $("wi-" + f.name + "-y"), n = $("wi-" + f.name + "-n");
+      if (y) y.setAttribute("aria-pressed", String(WI[f.name] >= 0.5));
+      if (n) n.setAttribute("aria-pressed", String(WI[f.name] < 0.5));
+    }
+  }
+
+  const logv = scoreLog(WI);
+  const changed = M.features.some(f => Math.abs(WI[f.name] - SEL.features[f.name]) > 1e-9);
+  $("wi-out").innerHTML =
+    '<span class="lbl">Modeled value</span>' +
+    '<span class="big">' + fmtExact(Math.exp(logv)) + "</span>" +
+    '<span class="band">' + M.band_label + " band " +
+      fmtMoney(Math.exp(logv - M.band_z * M.resid_sd_log)) + " \u2013 " +
+      fmtMoney(Math.exp(logv + M.band_z * M.resid_sd_log)) + "</span>" +
+    (changed ? '<button type="button" class="reset" id="wi-reset">Reset to ' +
+      esc(SEL.player) + "\u2019s real numbers</button>" : "");
+
+  const r = $("wi-reset");
+  if (r) r.addEventListener("click", () => {
+    WI = { ...SEL.features };
+    for (const f of M.features) {
+      const input = $("wi-" + f.name);
+      if ((f.kind === "money" || f.kind === "linear") && input) {
+        input.value = Math.min(Math.max(WI[f.name], parseFloat(input.min)),
+                               parseFloat(input.max));
+      }
+    }
+    syncWhatIf();
+  });
+}
+
+/* ---------- leaderboard ---------- */
+function renderResiduals() {
+  const sorted = [...DATA.players].sort((a, b) => b.residual_log - a.residual_log);
+  const d = M.diagnostics;
+
+  $("boardnote").innerHTML =
+    "Positive means the model values a player <b>above</b> what they went for \u2014 the " +
+    "bargain direction. This reads better than it used to: an earnings-only model barely " +
+    "moved off the average, so its ranking was <b>\u22120.93</b> correlated with price and " +
+    "mostly just re-listed who was cheap. With form in, that correlation is <b>" +
+    d.resid_vs_actual_corr.toFixed(2) + "</b> \u2014 lower, but still high enough to " +
+    "matter. <b>The $1,000 rows at the top are the price floor talking</b>, not a genuine " +
+    "find: MLP has a minimum bid, so the model cannot place anyone that low. The real " +
+    "disagreements are in the middle of the price range \u2014 a $28K player valued at " +
+    "$8K, or a $45K player at $7K, where the floor has no grip.";
+
+  const head = "<thead><tr><th>Player</th><th class='l'>Team</th><th>Pick</th>" +
+    "<th>Paid</th><th>Modeled</th><th>Held out</th><th>Gap</th></tr></thead>";
+
+  const rowHtml = (p) => {
+    const cls = p.residual_log > 0 ? "pos" : "neg";
+    return '<tr data-k="' + p.player_key + '"' + (SEL && SEL.player_key === p.player_key ?
+      ' class="sel"' : "") + '>' +
+      '<td class="name"><button type="button" data-k="' + p.player_key + '">' +
+        esc(p.player) + "</button></td>" +
+      '<td class="l" style="font-family:var(--display);color:var(--muted);font-size:13px">' +
+        esc(p.team || "\u2014") + "</td>" +
+      "<td>#" + p.pick_no + "</td>" +
+      "<td>" + fmtExact(p.actual) + "</td>" +
+      "<td>" + fmtExact(p.predicted) + "</td>" +
+      '<td style="color:var(--muted)">' + fmtExact(p.predicted_oof) + "</td>" +
+      '<td class="' + cls + '">' + fmtGap(p.residual_log) + "</td></tr>";
+  };
+
+  let body;
+  if (SHOW_ALL) {
+    body = "<tbody>" + sorted.map(rowHtml).join("") + "</tbody>";
+  } else {
+    const n = 8;
+    body = "<tbody>" +
+      '<tr><td class="grp u" colspan="7">Went cheapest relative to the model</td></tr>' +
+      sorted.slice(0, n).map(rowHtml).join("") +
+      '<tr><td class="grp o" colspan="7">Went dearest relative to the model</td></tr>' +
+      sorted.slice(-n).reverse().map(rowHtml).join("") + "</tbody>";
+  }
+  $("residuals").innerHTML = head + body;
+  $("residuals").querySelectorAll("button[data-k]").forEach(b =>
+    b.addEventListener("click", () => {
+      select(b.dataset.k);
+      $("lookup").scrollIntoView({ behavior: "smooth", block: "start" });
+    }));
+}
+
+$("t-ends").addEventListener("click", () => setBoard(false));
+$("t-all").addEventListener("click", () => setBoard(true));
+function setBoard(all) {
+  SHOW_ALL = all;
+  $("t-ends").setAttribute("aria-pressed", String(!all));
+  $("t-all").setAttribute("aria-pressed", String(all));
+  renderResiduals();
+}
+
+/* ---------- charts ---------- */
+const W = 540, H = 360, Mg = { l: 62, r: 22, t: 14, b: 48 };
+const svgNS = "http://www.w3.org/2000/svg";
+function el(name, attrs, parent) {
+  const n = document.createElementNS(svgNS, name);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+
+/**
+ * One scatter builder for all three charts. Every tick label names a value the
+ * chart actually reaches, and the viewBox leaves room for the outermost labels.
+ */
+function scatter(mount, opts) {
+  mount.innerHTML = "";
+  const svg = el("svg", {
+    viewBox: "0 0 " + W + " " + H, role: "img",
+    "aria-label": opts.aria, preserveAspectRatio: "xMidYMid meet",
+  }, mount);
+  const tip = document.createElement("div");
+  tip.className = "tip";
+  mount.appendChild(tip);
+
+  const xs = (v) => Mg.l + (v - opts.xDomain[0]) / (opts.xDomain[1] - opts.xDomain[0]) * (W - Mg.l - Mg.r);
+  const ys = (v) => H - Mg.b - (v - opts.yDomain[0]) / (opts.yDomain[1] - opts.yDomain[0]) * (H - Mg.t - Mg.b);
+
+  // grid + ticks
+  opts.yTicks.forEach(t => {
+    el("line", { x1: Mg.l, x2: W - Mg.r, y1: ys(t.v), y2: ys(t.v),
+      stroke: t.zero ? "var(--line-strong)" : "var(--line)",
+      "stroke-width": t.zero ? 1.5 : 1,
+      "stroke-dasharray": t.zero ? "" : "2 4" }, svg);
+    el("text", { x: Mg.l - 9, y: ys(t.v) + 4, "text-anchor": "end",
+      fill: "var(--muted)", "font-size": 11, "font-family": "var(--figure)" }, svg)
+      .textContent = t.label;
+  });
+  opts.xTicks.forEach(t => {
+    el("text", { x: xs(t.v), y: H - Mg.b + 18, "text-anchor": "middle",
+      fill: "var(--muted)", "font-size": 11, "font-family": "var(--figure)" }, svg)
+      .textContent = t.label;
+    el("line", { x1: xs(t.v), x2: xs(t.v), y1: H - Mg.b, y2: H - Mg.b + 5,
+      stroke: "var(--line-strong)", "stroke-width": 1 }, svg);
+  });
+  el("line", { x1: Mg.l, x2: W - Mg.r, y1: H - Mg.b, y2: H - Mg.b,
+    stroke: "var(--line-strong)", "stroke-width": 1.5 }, svg);
+
+  // identity line, where the model would be exactly right
+  if (opts.identity) {
+    const a = Math.max(opts.xDomain[0], opts.yDomain[0]);
+    const b = Math.min(opts.xDomain[1], opts.yDomain[1]);
+    el("line", { x1: xs(a), y1: ys(a), x2: xs(b), y2: ys(b),
+      stroke: "var(--kitchen)", "stroke-width": 2, "stroke-opacity": 0.9,
+      "stroke-dasharray": "7 5", "stroke-linecap": "round" }, svg);
+  }
+
+  // axis titles
+  el("text", { x: Mg.l + (W - Mg.l - Mg.r) / 2, y: H - 6, "text-anchor": "middle",
+    fill: "var(--ink-2)", "font-size": 11.5, "font-family": "var(--display)",
+    "font-weight": 600, "letter-spacing": "0.05em" }, svg).textContent = opts.xTitle;
+  el("text", { x: 13, y: Mg.t + (H - Mg.t - Mg.b) / 2, "text-anchor": "middle",
+    fill: "var(--ink-2)", "font-size": 11.5, "font-family": "var(--display)",
+    "font-weight": 600, "letter-spacing": "0.05em",
+    transform: "rotate(-90 13 " + (Mg.t + (H - Mg.t - Mg.b) / 2) + ")" }, svg)
+    .textContent = opts.yTitle;
+
+  // marks last, so they sit above the grid. 2px surface ring keeps overlaps readable.
+  opts.points.forEach(pt => {
+    const c = el("circle", { cx: xs(pt.x), cy: ys(pt.y), r: 5,
+      fill: pt.up ? "var(--under)" : "var(--over)", "fill-opacity": 0.82,
+      stroke: "var(--panel)", "stroke-width": 2, class: "dot", tabindex: "0",
+      role: "button", "aria-label": pt.label.replace(/\n/g, ", ") }, svg);
+    const show = () => {
+      tip.innerHTML = "<b>" + esc(pt.name) + "</b>" + esc(pt.label).replace(/\n/g, "<br>");
+      tip.style.left = (xs(pt.x) / W * 100) + "%";
+      tip.style.top = (ys(pt.y) / H * 100) + "%";
+      tip.classList.add("on");
+    };
+    const hide = () => tip.classList.remove("on");
+    c.addEventListener("mouseenter", show);
+    c.addEventListener("focus", show);
+    c.addEventListener("mouseleave", hide);
+    c.addEventListener("blur", hide);
+  });
+}
+
+const L10 = (v) => Math.log10(Math.max(v, 1));
+const moneyTicks = (lo, hi) => {
+  const out = [];
+  for (let e = Math.ceil(lo); e <= Math.floor(hi); e++) {
+    out.push({ v: e, label: fmtMoney(Math.pow(10, e)) });
+  }
+  return out;
+};
+
+function renderWhy() {
+  const d = M.diagnostics;
+  $("whynote").innerHTML =
+    "Teams paid between " + fmtMoney(d.actual_min) + " and " + fmtMoney(d.actual_max) +
+    " \u2014 a <b>" + Math.round(d.actual_spread_x) + "\u00d7 range</b>. The model now " +
+    "produces values spanning <b>" + Math.round(d.predicted_spread_x) + "\u00d7</b>, so the " +
+    "points track the yellow line instead of forming the flat band an earnings-only model " +
+    "produced. Both axes are logarithmic. The fit is real but loose: in-sample R\u00b2 is " +
+    d.in_sample_r2.toFixed(2) + ", cross-validated " + fmtR2(M.r2) + ", and the gap between " +
+    "those two is the price of fitting four features to " + M.n + " players.";
+
+  const pts = DATA.players.map(p => ({
+    x: L10(p.actual), y: L10(p.predicted), up: p.residual_log > 0, name: p.player,
+    label: "\npaid " + fmtExact(p.actual) + "\nmodeled " + fmtExact(p.predicted) +
+      "\n" + fmtGap(p.residual_log),
+  }));
+  scatter($("c-fit"), {
+    aria: "Modeled value against price paid, both on log scales, for all 60 drafted players.",
+    points: pts, identity: true,
+    xDomain: [2.8, 6.3], yDomain: [2.8, 6.3],
+    xTicks: moneyTicks(3, 6), yTicks: moneyTicks(3, 6),
+    xTitle: "PRICE PAID", yTitle: "MODELED VALUE",
+  });
+  const bright = DATA.players.find(p => p.player === "Anna Bright");
+  $("fitcap").innerHTML = "All " + M.n + " drafted players. Hover any point for detail. " +
+    "<b>Anna Bright</b>, the " + fmtMoney(1230000) + " top pick, now models at " +
+    fmtMoney(bright ? bright.predicted : 0) + " \u2014 an earnings-only model put her at " +
+    "$63K, two orders of magnitude low. The floor is where the model still struggles: " +
+    "it has no way to value a player at " + fmtMoney(1000) + ".";
+
+  const rTicks = [-3, -2, -1, 0, 1, 2, 3].map(v => ({
+    v, label: (v > 0 ? "+" : v < 0 ? "\u2212" : "") + Math.abs(v), zero: v === 0 }));
+
+  const r1 = DATA.players.map(p => ({
+    x: L10(p.predicted), y: p.residual_log, up: p.residual_log > 0, name: p.player,
+    label: "\nmodeled " + fmtExact(p.predicted) + "\nresidual " +
+      (p.residual_log > 0 ? "+" : "\u2212") + Math.abs(p.residual_log).toFixed(2) + " log $",
+  }));
+  scatter($("c-r1"), {
+    aria: "Residual against modeled value.",
+    points: r1, xDomain: [3.6, 6.3], yDomain: [-3.2, 3.2],
+    xTicks: moneyTicks(4, 6), yTicks: rTicks,
+    xTitle: "MODELED VALUE", yTitle: "RESIDUAL (LOG $)",
+  });
+  $("r1cap").innerHTML = "Residual vs. modeled value. The downward tilt is far shallower " +
+    "than before form was added, but it has not gone: the model still <b>under-values the " +
+    "very top and over-values the floor</b>.";
+
+  const fkey = "pd_doubles_mean";
+  const r2 = DATA.players.map(p => ({
+    x: p.features[fkey], y: p.residual_log, up: p.residual_log > 0, name: p.player,
+    label: "\ndoubles form " + p.features[fkey].toFixed(2) + "\nresidual " +
+      (p.residual_log > 0 ? "+" : "\u2212") + Math.abs(p.residual_log).toFixed(2) + " log $",
+  }));
+  scatter($("c-r2"), {
+    aria: "Residual against pre-draft doubles form.",
+    points: r2, xDomain: [0.6, 7.4], yDomain: [-3.2, 3.2],
+    xTicks: [1, 2, 3, 4, 5, 6, 7].map(v => ({ v, label: String(v) })), yTicks: rTicks,
+    xTitle: "DOUBLES FORM (1-7)", yTitle: "RESIDUAL (LOG $)",
+  });
+  $("r2cap").innerHTML = "Residual vs. pre-draft doubles form, the model's strongest " +
+    "feature. The spread is <b>roughly flat across the range</b>, which is what a " +
+    "well-specified term looks like \u2014 the model is not systematically wrong at any " +
+    "particular level of form. (This replaced a residual-vs-earnings plot; earnings is no " +
+    "longer the lead feature.)";
+}
+
+function renderCoefs() {
+  const rows = [...M.features].sort((a, b) => Math.abs(b.coef) - Math.abs(a.coef));
+  $("coeftable").innerHTML =
+    "<thead><tr><th>Feature</th><th>Ridge coef</th><th>Per +1 SD</th>" +
+    "<th>OLS 95% CI</th><th>p</th></tr></thead><tbody>" +
+    rows.map(f => {
+      const pos = f.coef >= 0;
+      const crosses = f.ci_lo < 0 && f.ci_hi > 0;
+      return '<tr><td class="name" title="' + esc(f.blurb) + '">' + esc(f.label) + "</td>" +
+        '<td class="' + (pos ? "pos" : "neg") + '">' + (pos ? "+" : "\u2212") +
+          Math.abs(f.coef).toFixed(3) + "</td>" +
+        "<td>" + (pos ? "\u00d7" : "\u00f7") + Math.exp(Math.abs(f.coef)).toFixed(2) + "</td>" +
+        '<td style="color:var(--muted)">[' + (f.ci_lo >= 0 ? "+" : "\u2212") +
+          Math.abs(f.ci_lo).toFixed(2) + ", " + (f.ci_hi >= 0 ? "+" : "\u2212") +
+          Math.abs(f.ci_hi).toFixed(2) + "]</td>" +
+        '<td style="color:' + (crosses ? "var(--muted)" : "var(--ink)") + '">' +
+          f.p_value.toFixed(3) + "</td></tr>";
+    }).join("") + "</tbody>";
+
+  const dbl = M.features.find(f => f.name === "pd_doubles_mean");
+  const earn = M.features.find(f => f.name === "log_total_2025");
+  $("coefnote").innerHTML =
+    "Coefficients are standardized: the multiplier on price for a one-standard-deviation " +
+    "move. <b>Doubles form is the only term whose interval clears zero</b> (p = " +
+    dbl.p_value.toFixed(3) + "); a one-SD better run through doubles brackets multiplies " +
+    "modeled value by <b>" + Math.exp(dbl.coef).toFixed(2) + "\u00d7</b>." +
+    "<br><br>The result worth noticing is <b>2025 earnings, now at " +
+    (earn.coef >= 0 ? "+" : "\u2212") + Math.abs(earn.coef).toFixed(3) + "</b>. It was the " +
+    "best feature in the project until form arrived; conditional on how a player was " +
+    "actually playing, prior earnings adds nothing and the sign flips. Don't read that " +
+    "negative as \u201cearning more lowers your price\u201d \u2014 it is a suppression " +
+    "effect between two correlated predictors, and the interval comfortably spans zero. " +
+    "The honest statement is that <b>earnings stopped mattering once form was measured</b>." +
+    "<br><br>Gender and DUPR were dropped. The apparent female premium was two rows: the " +
+    "F\u2212M gap in mean log price is +0.42 across all 60 and <b>+0.14</b> once Anna " +
+    "Bright and Jorja Johnson are set aside. Carrying a term that rests on two players " +
+    "was not defensible.";
+}
+function renderMethod() {
+  const b = M.baselines, f = M.form;
+  $("methodnote").innerHTML =
+    "Ridge regression (\u03b1 = " + M.alpha + ") on standardized features, target " +
+    "<code>log(price)</code>, scored by repeated 5-fold cross-validation (" + M.n_folds +
+    " folds). Features: average and best round reached in pre-draft brackets, brackets " +
+    "entered, and <code>log1p</code> of 2025 earnings. Form is built from " +
+    "per-bracket tournament results dated strictly before <code>" + f.cutoff + "</code>, " +
+    "draft day.";
+
+  const notes = [
+    ["01", "<b>The date cutoff is the leakage control.</b> Form uses only brackets that " +
+      "finished before " + f.cutoff + ". <code>features.py</code> re-applies that filter " +
+      "itself rather than trusting the scraper's flag, and raises if a single post-draft " +
+      "row survives. Results after draft day are the outcome of the same season teams were " +
+      "betting on \u2014 using them would be predicting the past from the future."],
+    ["02", "<b>Form coverage is " + f.covered + " of " + M.n + ".</b> " + f.imputed +
+      " players entered no rated bracket in the window and take the median, flagged on " +
+      "their card. That is better coverage than the DUPR rating this model used to lean " +
+      "on (29 of 60)."],
+    ["03", "<b>The feature set was chosen by nested cross-validation</b>, so the headline " +
+      "number pays for the search. An inner loop picked among five candidate sets and five " +
+      "ridge strengths inside each training fold; the outer score was " +
+      "<b>+0.304</b>, close to the " + fmtR2(M.r2) + " quoted here. The inner loop never " +
+      "once selected an earnings-only or pre-form set."],
+    ["04", "<b>It beats both baselines now.</b> Predict-the-mean scores " +
+      fmtR2(b.mean_only.r2) + ", 2025 earnings alone " + fmtR2(b.earnings_only.r2) +
+      ", this model " + fmtR2(M.r2) + ". The earlier four-feature model built on earnings, " +
+      "gender and DUPR scored +0.033 and lost to the earnings baseline."],
+    ["05", "<b>Mean dollar error went up, and that is not a regression.</b> Mean absolute " +
+      "error is " + fmtMoney(M.mae_dollars) + ", worse than the old model's $56K, because " +
+      "two picks carry half the draft's dollars and the model now predicts boldly enough " +
+      "to miss them by large absolute amounts. On the robust measures it improved: median " +
+      "absolute error fell from $15.4K to $14.3K and mean log error from 1.13 to 0.97."],
+    ["06", "<b>Form is seven weeks of one tour.</b> DinkBank's results table covers 2026 " +
+      "only, so the window runs 12 January to 16 February 2026 and every bracket in it is " +
+      "PPA. There is no career match history here and no APP or MLP play in the window."],
+    ["07", "<b>Finish quality ignores the strength of the field.</b> A Round of 32 exit at " +
+      "a stacked major and one at a thin draw score the same 1. Weighting by field strength " +
+      "is the obvious next improvement."],
+    ["08", "<b>Pros only, by design.</b> The training set is 60 people in the top fraction " +
+      "of a percent of the sport, so the sliders stop at the observed range and no amateur " +
+      "tier is offered."],
+    ["09", "<b>The 2024 rank check was retired.</b> It scored the model against 2024's 17 " +
+      "priced picks, which is impossible now: the form features come from 2026 brackets " +
+      "that postdate that draft by two years."],
+  ];
+  $("caveats").innerHTML = notes.map(([k, t]) =>
+    '<div class="note"><span class="k">' + k + '</span><span class="t">' + t + "</span></div>").join("");
+
+  $("footnote").innerHTML = "Modeled values are not prices. R\u00b2 " + fmtR2(M.r2) +
+    " on " + M.n + " players means the band is still part of the result. Built with pandas, " +
+    "scikit-learn and statsmodels; regenerate with <code>python3 src/export.py</code>.";
+}
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+loadData();
+</script>
