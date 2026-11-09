@@ -137,7 +137,7 @@ features. See `data/DATA.md` for the scrape and its limits.
 |---|---|---|
 | Predict the mean | -0.007 | — |
 | 2025 earnings only | +0.059 | +0.249 |
-| **Doubles form + best finish + brackets + earnings** | **+0.344** | **+0.448** |
+| **Doubles form + best finish + brackets + earnings** | **+0.354** | **+0.448** |
 
 Nested cross-validation — inner loop choosing among five feature sets and five
 ridge strengths inside each training fold — gives **+0.304**, so the gain is not
@@ -170,3 +170,48 @@ Bright**, where earnings-only went to -0.038.
 2. **Earlier seasons of results**, which would also restore the 2024 check.
 3. **More seasons of prices** (2023/2025 sit behind Forbes).
 4. **As-of-draft-date DUPR** via the API request below.
+
+---
+
+## Round three: DUPR answered the email (November 2026)
+
+The data request in `docs/` worked. DUPR supplied a 153-player file of singles
+and doubles ratings with a `rating_date` on each one, which solved the problem
+that killed the first attempt: the only ratings previously reachable were
+*current* ones carrying seven months of post-draft results.
+
+**The ratings did not improve the model.** Full workings in `data/DATA.md`; the
+short version:
+
+- Raw, a doubles rating correlates +0.34 with log price — weaker than
+  `pd_doubles_mean` (+0.61) and 0.42 correlated with it. As a fifth feature it
+  made things worse (+0.354 → +0.317).
+- The rating behaves very differently by field: **+0.68 within the women,
+  +0.22 within the men**. Carried as a within-field z-score interacted with
+  `is_female`, it reached CV R² **+0.407**, p = 0.034.
+- That result was an artifact. Five picks had no recorded gender and defaulted
+  to not-female; **two were women**. Reading gender off the gendered brackets
+  players actually entered moved the coefficient from +0.402 to +0.291, the
+  interval back across zero (p = 0.18), and the paired gain to nothing (better
+  in 13 of 20 independent repeats, p = 0.45).
+
+So the term is measured on every export and left out of the model.
+
+### Two things that did survive from this round
+
+1. **Prediction capping.** Never predict above the priciest player in the
+   training fold. The top pick went for 54% more than the next, so held out she
+   had no comparable and the model said $7.2M. Moves 1 of 60 predictions; mean
+   absolute error $129K → $38K, CV R² +0.344 → +0.354.
+2. **Gender inference from brackets.** MD/MS is a man, WD/WS a woman. Agrees
+   with the recorded value on every player who has both, and nobody appears in
+   both draws, so `load()` raises on disagreement instead of preferring a
+   source.
+
+### What this says about the original question
+
+The project set out asking whether a skill rating would price players. The
+answer the data gives is that **a rating adds nothing once you can see seven
+weeks of actual results** — the rating and the results are measuring the same
+thing, and the results are more current. That is a more useful finding than a
+small R² bump would have been, and it is the honest thing to send back to DUPR.

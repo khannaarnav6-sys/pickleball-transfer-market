@@ -5,8 +5,15 @@
 # The DUPR access request is a personal draft, not part of the public project.
 docs/dupr-data-request.md
 
+# Ratings DUPR supplied directly on request (2026-11-08). The data request said
+# this project was not looking to republish ratings, so the file stays local and
+# app/data.json carries only the normalised term derived from it -- never a
+# rating, an id, or the per-gender mean/sd that would invert one. See data/DATA.md.
+data/dupr_ratings.csv
+
 __pycache__/
 *.pyc
 .DS_Store
 .venv/
 venv/
+docs/HOW-IT-WORKS.md

@@ -7,17 +7,67 @@
       "covered": 52,
       "imputed": 8
     },
+    "dupr": {
+      "available": true,
+      "source": "supplied directly by DUPR on request, 2026-11-08",
+      "cutoff": "2026-02-27",
+      "matched": 57,
+      "n": 60,
+      "pool_after_cutoff": 152,
+      "date_min": "2025-11-22",
+      "date_max": "2026-02-23",
+      "unmatched_players": [
+        "Ava Cavataio",
+        "Genie Bouchard",
+        "Tom Protzek"
+      ],
+      "match_kinds": {
+        "exact": 50,
+        "initial_surname": 6,
+        "unmatched": 3,
+        "fuzzy": 1
+      },
+      "ratings_published": false,
+      "experiment": {
+        "available": true,
+        "r2_form": 0.35427258623534863,
+        "r2_dupr": 0.35875683771836775,
+        "spearman_form": 0.44776681510030897,
+        "spearman_dupr": 0.49226814463385105,
+        "paired_mean": -0.0008632964449648165,
+        "paired_better": 13,
+        "paired_repeats": 20,
+        "paired_p": 0.4523754119873047,
+        "within": {
+          "men": {
+            "n": 29,
+            "corr": 0.21625630714670518,
+            "r2_form": 0.2174168349242298,
+            "r2_dupr": 0.17993396372346337
+          },
+          "women": {
+            "n": 31,
+            "corr": 0.6747216105649465,
+            "r2_form": 0.4290116519197945,
+            "r2_dupr": 0.4590813920834177
+          }
+        },
+        "shipped": false
+      }
+    },
+    "cap_dollars": 1229999.9999999995,
+    "n_capped": 1,
     "target": "log(price_raw)",
     "alpha": 10.0,
     "intercept": 9.853990232435027,
-    "r2": 0.34394176809464294,
-    "mae_dollars": 83447.16532453064,
-    "fold_r2_mean": 0.1880411246558139,
-    "fold_r2_sd": 0.3151025098265285,
+    "r2": 0.35427258623534863,
+    "mae_dollars": 38474.20301006492,
+    "fold_r2_mean": 0.19351622433740595,
+    "fold_r2_sd": 0.3185079214258644,
     "fold_r2_p10": -0.27933931253530014,
-    "fold_r2_p90": 0.5719525455875972,
+    "fold_r2_p90": 0.5662778077548556,
     "n_folds": 100,
-    "resid_sd_log": 1.234062434734346,
+    "resid_sd_log": 1.2245279888063492,
     "band_z": 1.2816,
     "band_label": "80%",
     "coefficients": [
@@ -127,23 +177,23 @@
     "alpha_sensitivity": [
       {
         "alpha": 0.1,
-        "r2": 0.2958129692909488
+        "r2": 0.3560539287079977
       },
       {
         "alpha": 1.0,
-        "r2": 0.30571263559415096
+        "r2": 0.35679973886475236
       },
       {
         "alpha": 3.0,
-        "r2": 0.32151841101976786
+        "r2": 0.35737106978543476
       },
       {
         "alpha": 10.0,
-        "r2": 0.34394176809464294
+        "r2": 0.35427258623534863
       },
       {
         "alpha": 30.0,
-        "r2": 0.3397689792744043
+        "r2": 0.3384869640300374
       },
       {
         "alpha": 100.0,
@@ -157,14 +207,14 @@
     "holdout_2024_rank": null,
     "diagnostics": {
       "predicted_min": 7230.9205719004385,
-      "predicted_max": 1587070.399496371,
-      "predicted_spread_x": 219.48386567317186,
+      "predicted_max": 1229999.9999999995,
+      "predicted_spread_x": 170.10282270003273,
       "actual_min": 1000.0,
       "actual_max": 1230000.0,
       "actual_spread_x": 1230.0,
-      "resid_vs_actual_corr": -0.8165192544918537,
-      "oof_vs_insample_resid_corr": 0.991539163051584,
-      "in_sample_r2": 0.411839922940043
+      "resid_vs_actual_corr": -0.8269697550109427,
+      "oof_vs_insample_resid_corr": 0.995835000404232,
+      "in_sample_r2": 0.41231406690977634
     }
   },
   "players": [
@@ -175,18 +225,20 @@
       "pick_no": 1,
       "gender": "Female",
       "actual": 1230000,
-      "predicted": 1587070,
-      "predicted_lo": 326383,
-      "predicted_hi": 7717297,
-      "predicted_oof": 4358378,
-      "residual_log": 0.2548756312872005,
-      "residual_log_oof": 1.2650857404970353,
+      "predicted": 1230000,
+      "predicted_uncapped": 1587070,
+      "predicted_lo": 256061,
+      "predicted_hi": 5908366,
+      "predicted_oof": 800000,
+      "residual_log": 0.0,
+      "residual_log_oof": -0.430157720698535,
       "features": {
         "pd_doubles_mean": 6.625,
         "pd_round_max": 7.0,
         "pd_events": 8.0,
         "log_total_2025": 13.785665594782593
       },
+      "capped": true,
       "contributions": {
         "pd_doubles_mean": 3.4521270095681857,
         "pd_round_max": 1.0571134347795343,
@@ -205,7 +257,10 @@
         "pd_podiums": 8.0,
         "pd_prize": 185500.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -216,8 +271,9 @@
       "gender": "Female",
       "actual": 800000,
       "predicted": 241431,
-      "predicted_lo": 49650,
-      "predicted_hi": 1173982,
+      "predicted_uncapped": 241431,
+      "predicted_lo": 50261,
+      "predicted_hi": 1159724,
       "predicted_oof": 173452,
       "residual_log": -1.1980294724605898,
       "residual_log_oof": -1.5287080521868806,
@@ -227,6 +283,7 @@
         "pd_events": 8.0,
         "log_total_2025": 13.276881989536195
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 1.786712030884347,
         "pd_round_max": 0.8177669967162436,
@@ -245,7 +302,10 @@
         "pd_podiums": 4.0,
         "pd_prize": 49802.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -256,8 +316,9 @@
       "gender": "Female",
       "actual": 180000,
       "predicted": 13644,
-      "predicted_lo": 2806,
-      "predicted_hi": 66347,
+      "predicted_uncapped": 13644,
+      "predicted_lo": 2840,
+      "predicted_hi": 65541,
       "predicted_oof": 13145,
       "residual_log": -2.579631445022807,
       "residual_log_oof": -2.616897121479772,
@@ -267,6 +328,7 @@
         "pd_events": 6.0,
         "log_total_2025": 9.741027444837728
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -285,7 +347,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -296,8 +361,9 @@
       "gender": "Female",
       "actual": 105000,
       "predicted": 78703,
-      "predicted_lo": 16185,
-      "predicted_hi": 382699,
+      "predicted_uncapped": 78703,
+      "predicted_lo": 16384,
+      "predicted_hi": 378052,
       "predicted_oof": 84357,
       "residual_log": -0.2882847379386728,
       "residual_log_oof": -0.21890043254444969,
@@ -307,6 +373,7 @@
         "pd_events": 11.0,
         "log_total_2025": 12.872888684343732
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.5124477856928382,
         "pd_round_max": 0.8177669967162436,
@@ -325,7 +392,10 @@
         "pd_podiums": 2.0,
         "pd_prize": 12360.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -336,8 +406,9 @@
       "gender": "Female",
       "actual": 75000,
       "predicted": 27726,
-      "predicted_lo": 5702,
-      "predicted_hi": 134822,
+      "predicted_uncapped": 27726,
+      "predicted_lo": 5772,
+      "predicted_hi": 133184,
       "predicted_oof": 27692,
       "residual_log": -0.9951089974358602,
       "residual_log_oof": -0.9963297137889242,
@@ -347,6 +418,7 @@
         "pd_events": 8.0,
         "log_total_2025": 10.121538156784329
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.20597916976070324,
         "pd_round_max": 0.09972768252637114,
@@ -365,7 +437,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 4868.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -376,8 +451,9 @@
       "gender": "Female",
       "actual": 90000,
       "predicted": 39528,
-      "predicted_lo": 8129,
-      "predicted_hi": 192208,
+      "predicted_uncapped": 39528,
+      "predicted_lo": 8229,
+      "predicted_hi": 189873,
       "predicted_oof": 38493,
       "residual_log": -0.8228074394585274,
       "residual_log_oof": -0.8493391798828487,
@@ -387,6 +463,7 @@
         "pd_events": 12.0,
         "log_total_2025": 12.680973638091665
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.488252894961354,
         "pd_round_max": 0.09972768252637114,
@@ -405,7 +482,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 8744.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "initial_surname",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -416,8 +496,9 @@
       "gender": "Male",
       "actual": 170000,
       "predicted": 85427,
-      "predicted_lo": 17568,
-      "predicted_hi": 415400,
+      "predicted_uncapped": 85427,
+      "predicted_lo": 17784,
+      "predicted_hi": 410355,
       "predicted_oof": 71896,
       "residual_log": -0.6881311914486297,
       "residual_log_oof": -0.8605721672595159,
@@ -427,6 +508,7 @@
         "pd_events": 10.0,
         "log_total_2025": 13.351320397714268
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.8995660373965878,
         "pd_round_max": 0.5784205586529528,
@@ -445,7 +527,10 @@
         "pd_podiums": 2.0,
         "pd_prize": 12850.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -453,11 +538,12 @@
       "player": "Jack Sock",
       "team": "Orlando Squeeze",
       "pick_no": 8,
-      "gender": null,
+      "gender": "Male",
       "actual": 105000,
       "predicted": 70119,
-      "predicted_lo": 14420,
-      "predicted_hi": 340960,
+      "predicted_uncapped": 70119,
+      "predicted_lo": 14597,
+      "predicted_hi": 336819,
       "predicted_oof": 65078,
       "residual_log": -0.4037684086148321,
       "residual_log_oof": -0.47836639111789836,
@@ -467,6 +553,7 @@
         "pd_events": 6.0,
         "log_total_2025": 13.664786500554918
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.6576171300817443,
         "pd_round_max": 0.8177669967162436,
@@ -485,7 +572,10 @@
         "pd_podiums": 1.0,
         "pd_prize": 29033.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": true
       }
     },
     {
@@ -496,8 +586,9 @@
       "gender": "Male",
       "actual": 125000,
       "predicted": 23622,
-      "predicted_lo": 4858,
-      "predicted_hi": 114863,
+      "predicted_uncapped": 23622,
+      "predicted_lo": 4918,
+      "predicted_hi": 113468,
       "predicted_oof": 20819,
       "residual_log": -1.6661491256981833,
       "residual_log_oof": -1.7924702924736788,
@@ -507,6 +598,7 @@
         "pd_events": 5.0,
         "log_total_2025": 8.038834757787749
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.0930696796804431,
         "pd_round_max": 0.09972768252637114,
@@ -525,7 +617,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 941.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -536,8 +631,9 @@
       "gender": "Male",
       "actual": 85000,
       "predicted": 16184,
-      "predicted_lo": 3328,
-      "predicted_hi": 78696,
+      "predicted_uncapped": 16184,
+      "predicted_lo": 3369,
+      "predicted_hi": 77741,
       "predicted_oof": 16462,
       "residual_log": -1.6586290364240934,
       "residual_log_oof": -1.6416080693477522,
@@ -547,6 +643,7 @@
         "pd_events": 6.0,
         "log_total_2025": 9.709781436875536
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.01983981039981721,
         "pd_round_max": -0.1396187555369197,
@@ -565,7 +662,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 3167.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -576,8 +676,9 @@
       "gender": "Female",
       "actual": 85000,
       "predicted": 70764,
-      "predicted_lo": 14553,
-      "predicted_hi": 344096,
+      "predicted_uncapped": 70764,
+      "predicted_lo": 14732,
+      "predicted_hi": 339916,
       "predicted_oof": 60458,
       "residual_log": -0.18330641964691097,
       "residual_log_oof": -0.34070513585045425,
@@ -587,6 +688,7 @@
         "pd_events": 6.0,
         "log_total_2025": 13.132982791302199
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.883436110242265,
         "pd_round_max": 0.5784205586529528,
@@ -605,7 +707,10 @@
         "pd_podiums": 1.0,
         "pd_prize": 9840.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -616,8 +721,9 @@
       "gender": "Male",
       "actual": 65000,
       "predicted": 31311,
-      "predicted_lo": 6439,
-      "predicted_hi": 152254,
+      "predicted_uncapped": 31311,
+      "predicted_lo": 6518,
+      "predicted_hi": 150405,
       "predicted_oof": 28683,
       "residual_log": -0.7304086512961145,
       "residual_log_oof": -0.8180985799138174,
@@ -627,6 +733,7 @@
         "pd_events": 11.0,
         "log_total_2025": 13.109677247663777
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.3188886598409636,
         "pd_round_max": 0.09972768252637114,
@@ -645,7 +752,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 19553.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -656,8 +766,9 @@
       "gender": "Female",
       "actual": 65000,
       "predicted": 19932,
-      "predicted_lo": 4099,
-      "predicted_hi": 96923,
+      "predicted_uncapped": 19932,
+      "predicted_lo": 4149,
+      "predicted_hi": 95746,
       "predicted_oof": 16966,
       "residual_log": -1.182047134748128,
       "residual_log_oof": -1.3431533914486309,
@@ -667,6 +778,7 @@
         "pd_events": 12.0,
         "log_total_2025": 7.237778191923443
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -685,7 +797,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 4105.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -696,8 +811,9 @@
       "gender": "Male",
       "actual": 40000,
       "predicted": 16562,
-      "predicted_lo": 3406,
-      "predicted_hi": 80537,
+      "predicted_uncapped": 16562,
+      "predicted_lo": 3448,
+      "predicted_hi": 79559,
       "predicted_oof": 16784,
       "residual_log": -0.8817408571006222,
       "residual_log_oof": -0.8684266786501329,
@@ -707,6 +823,7 @@
         "pd_events": 5.0,
         "log_total_2025": 9.692272572087193
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.047905883648339004,
         "pd_round_max": -0.1396187555369197,
@@ -725,7 +842,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 3138.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -736,8 +856,9 @@
       "gender": "Female",
       "actual": 45000,
       "predicted": 27047,
-      "predicted_lo": 5562,
-      "predicted_hi": 131517,
+      "predicted_uncapped": 27047,
+      "predicted_lo": 5631,
+      "predicted_hi": 129919,
       "predicted_oof": 30951,
       "residual_log": -0.5091030102837646,
       "residual_log_oof": -0.3742552072412284,
@@ -747,6 +868,7 @@
         "pd_events": 9.0,
         "log_total_2025": 7.319202458767849
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.2230768925442857,
         "pd_round_max": 0.33907412058966196,
@@ -765,7 +887,10 @@
         "pd_podiums": 1.0,
         "pd_prize": 4072.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -773,11 +898,12 @@
       "player": "Camden Chaffin",
       "team": "Phoenix Flames",
       "pick_no": 16,
-      "gender": null,
+      "gender": "Male",
       "actual": 35000,
       "predicted": 16347,
-      "predicted_lo": 3362,
-      "predicted_hi": 79487,
+      "predicted_uncapped": 16347,
+      "predicted_lo": 3403,
+      "predicted_hi": 78521,
       "predicted_oof": 12247,
       "residual_log": -0.7613342354357346,
       "residual_log_oof": -1.0500838764586984,
@@ -787,6 +913,7 @@
         "pd_events": 4.0,
         "log_total_2025": 5.017279836814924
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": 0.09972768252637114,
@@ -805,7 +932,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 689.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": true
       }
     },
     {
@@ -816,8 +946,9 @@
       "gender": "Male",
       "actual": 40000,
       "predicted": 16735,
-      "predicted_lo": 3442,
-      "predicted_hi": 81376,
+      "predicted_uncapped": 16735,
+      "predicted_lo": 3484,
+      "predicted_hi": 80387,
       "predicted_oof": 14150,
       "residual_log": -0.8713775452298407,
       "residual_log_oof": -1.0391614734402665,
@@ -827,6 +958,7 @@
         "pd_events": 4.0,
         "log_total_2025": 6.796823718274855
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.01983981039981721,
         "pd_round_max": -0.1396187555369197,
@@ -845,7 +977,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2208.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -853,11 +988,12 @@
       "player": "Len Yang",
       "team": "Bay Area Breakers",
       "pick_no": 18,
-      "gender": null,
+      "gender": "Male",
       "actual": 35000,
       "predicted": 18382,
-      "predicted_lo": 3780,
-      "predicted_hi": 89384,
+      "predicted_uncapped": 18382,
+      "predicted_lo": 3827,
+      "predicted_hi": 88298,
       "predicted_oof": 19034,
       "residual_log": -0.6439819146690287,
       "residual_log_oof": -0.609145192427393,
@@ -867,6 +1003,7 @@
         "pd_events": 1.0,
         "log_total_2025": 9.346443454968522
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.3188886598409636,
         "pd_round_max": -0.1396187555369197,
@@ -885,7 +1022,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 760.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": true
       }
     },
     {
@@ -896,8 +1036,9 @@
       "gender": "Female",
       "actual": 50000,
       "predicted": 27620,
-      "predicted_lo": 5680,
-      "predicted_hi": 134303,
+      "predicted_uncapped": 27620,
+      "predicted_lo": 5750,
+      "predicted_hi": 132672,
       "predicted_oof": 31296,
       "residual_log": -0.5934982258600954,
       "residual_log_oof": -0.4685455505888161,
@@ -907,6 +1048,7 @@
         "pd_events": 8.0,
         "log_total_2025": 12.859389527177186
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.3188886598409636,
         "pd_round_max": 0.09972768252637114,
@@ -925,7 +1067,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 6336.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -936,8 +1081,9 @@
       "gender": "Female",
       "actual": 45000,
       "predicted": 7231,
-      "predicted_lo": 1487,
-      "predicted_hi": 35161,
+      "predicted_uncapped": 7231,
+      "predicted_lo": 1505,
+      "predicted_hi": 34734,
       "predicted_oof": 6903,
       "residual_log": -1.8282961350244413,
       "residual_log_oof": -1.8747469675104274,
@@ -947,6 +1093,7 @@
         "pd_events": 1.0,
         "log_total_2025": 9.726213236963687
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -965,7 +1112,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 93.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -976,8 +1126,9 @@
       "gender": "Female",
       "actual": 35000,
       "predicted": 13905,
-      "predicted_lo": 2859,
-      "predicted_hi": 67613,
+      "predicted_uncapped": 13905,
+      "predicted_lo": 2895,
+      "predicted_hi": 66791,
       "predicted_oof": 13489,
       "residual_log": -0.923127785882663,
       "residual_log_oof": -0.9534644931915359,
@@ -987,6 +1138,7 @@
         "pd_events": 6.0,
         "log_total_2025": 9.29798488182823
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -1005,7 +1157,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1016,8 +1171,9 @@
       "gender": "Female",
       "actual": 20000,
       "predicted": 29617,
-      "predicted_lo": 6091,
-      "predicted_hi": 144014,
+      "predicted_uncapped": 29617,
+      "predicted_lo": 6166,
+      "predicted_hi": 142265,
       "predicted_oof": 28817,
       "residual_log": 0.39260174174728313,
       "residual_log_oof": 0.3652165855156593,
@@ -1027,6 +1183,7 @@
         "pd_events": 5.0,
         "log_total_2025": 8.982184278838428
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": 0.8177669967162436,
@@ -1045,7 +1202,10 @@
         "pd_podiums": 1.0,
         "pd_prize": 3431.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "unmatched",
+        "has_dupr": 0,
+        "gender_inferred": false
       }
     },
     {
@@ -1056,8 +1216,9 @@
       "gender": "Male",
       "actual": 30000,
       "predicted": 35531,
-      "predicted_lo": 7307,
-      "predicted_hi": 172773,
+      "predicted_uncapped": 35531,
+      "predicted_lo": 7397,
+      "predicted_hi": 170675,
       "predicted_oof": 37916,
       "residual_log": 0.1692067273591693,
       "residual_log_oof": 0.23417680235533567,
@@ -1067,6 +1228,7 @@
         "pd_events": 5.0,
         "log_total_2025": 10.32518683708304
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": 1.0571134347795343,
@@ -1085,7 +1247,10 @@
         "pd_podiums": 3.0,
         "pd_prize": 18773.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "initial_surname",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1096,8 +1261,9 @@
       "gender": "Female",
       "actual": 10000,
       "predicted": 9015,
-      "predicted_lo": 1854,
-      "predicted_hi": 43835,
+      "predicted_uncapped": 9015,
+      "predicted_lo": 1877,
+      "predicted_hi": 43302,
       "predicted_oof": 9631,
       "residual_log": -0.10373810537476835,
       "residual_log_oof": -0.03757846674204224,
@@ -1107,6 +1273,7 @@
         "pd_events": 2.0,
         "log_total_2025": 5.62040086571715
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -1125,7 +1292,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 487.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1136,8 +1306,9 @@
       "gender": "Female",
       "actual": 10000,
       "predicted": 7779,
-      "predicted_lo": 1600,
-      "predicted_hi": 37825,
+      "predicted_uncapped": 7779,
+      "predicted_lo": 1619,
+      "predicted_hi": 37366,
       "predicted_oof": 9128,
       "residual_log": -0.2511897648486521,
       "residual_log_oof": -0.0912126560128872,
@@ -1147,6 +1318,7 @@
         "pd_events": 2.0,
         "log_total_2025": 9.077813488005308
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -1165,7 +1337,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 77.0,
         "has_results": 1,
-        "imputed_total_2025": true
+        "imputed_total_2025": true,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1176,8 +1351,9 @@
       "gender": "Male",
       "actual": 25000,
       "predicted": 18515,
-      "predicted_lo": 3808,
-      "predicted_hi": 90030,
+      "predicted_uncapped": 18515,
+      "predicted_lo": 3854,
+      "predicted_hi": 88937,
       "predicted_oof": 18593,
       "residual_log": -0.30030634240910814,
       "residual_log_oof": -0.29607143851040263,
@@ -1187,6 +1363,7 @@
         "pd_events": 8.0,
         "log_total_2025": 10.323808431876278
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": 0.09972768252637114,
@@ -1205,7 +1382,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 3806.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "initial_surname",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1213,11 +1393,12 @@
       "player": "Elsie Hendershot",
       "team": "St. Louis Shock",
       "pick_no": 30,
-      "gender": null,
+      "gender": "Female",
       "actual": 28000,
       "predicted": 7779,
-      "predicted_lo": 1600,
-      "predicted_hi": 37825,
+      "predicted_uncapped": 7779,
+      "predicted_lo": 1619,
+      "predicted_hi": 37366,
       "predicted_oof": 6967,
       "residual_log": -1.2808091820298095,
       "residual_log_oof": -1.3910114432852048,
@@ -1227,6 +1408,7 @@
         "pd_events": 2.0,
         "log_total_2025": 9.077813488005308
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -1245,7 +1427,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 214.0,
         "has_results": 1,
-        "imputed_total_2025": true
+        "imputed_total_2025": true,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": true
       }
     },
     {
@@ -1256,8 +1441,9 @@
       "gender": "Male",
       "actual": 30000,
       "predicted": 8364,
-      "predicted_lo": 1720,
-      "predicted_hi": 40673,
+      "predicted_uncapped": 8364,
+      "predicted_lo": 1741,
+      "predicted_hi": 40179,
       "predicted_oof": 7776,
       "residual_log": -1.2772104240490165,
       "residual_log_oof": -1.3502157590100374,
@@ -1267,6 +1453,7 @@
         "pd_events": 1.0,
         "log_total_2025": 6.311734809152915
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -1285,7 +1472,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 600.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1296,8 +1486,9 @@
       "gender": "Female",
       "actual": 35000,
       "predicted": 14824,
-      "predicted_lo": 3049,
-      "predicted_hi": 72084,
+      "predicted_uncapped": 14824,
+      "predicted_lo": 3086,
+      "predicted_hi": 71208,
       "predicted_oof": 15686,
       "residual_log": -0.8590911790769642,
       "residual_log_oof": -0.8025971351568728,
@@ -1307,6 +1498,7 @@
         "pd_events": 6.0,
         "log_total_2025": 7.796469243086058
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -1325,7 +1517,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2044.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1336,8 +1531,9 @@
       "gender": "Male",
       "actual": 26000,
       "predicted": 7724,
-      "predicted_lo": 1588,
-      "predicted_hi": 37560,
+      "predicted_uncapped": 7724,
+      "predicted_lo": 1608,
+      "predicted_hi": 37103,
       "predicted_oof": 7486,
       "residual_log": -1.2137412259886275,
       "residual_log_oof": -1.2451148633476574,
@@ -1347,6 +1543,7 @@
         "pd_events": 1.0,
         "log_total_2025": 8.178919332848396
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -1365,7 +1562,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 63.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1376,8 +1576,9 @@
       "gender": "Male",
       "actual": 24000,
       "predicted": 8909,
-      "predicted_lo": 1832,
-      "predicted_hi": 43321,
+      "predicted_uncapped": 8909,
+      "predicted_lo": 1855,
+      "predicted_hi": 42795,
       "predicted_oof": 9453,
       "residual_log": -0.9909862287433953,
       "residual_log_oof": -0.9317354196395868,
@@ -1387,6 +1588,7 @@
         "pd_events": 4.0,
         "log_total_2025": 8.024534871605695
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -1405,7 +1607,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1191.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1416,8 +1621,9 @@
       "gender": "Male",
       "actual": 21000,
       "predicted": 9822,
-      "predicted_lo": 2020,
-      "predicted_hi": 47759,
+      "predicted_uncapped": 9822,
+      "predicted_lo": 2045,
+      "predicted_hi": 47179,
       "predicted_oof": 10142,
       "residual_log": -0.759920587320476,
       "residual_log_oof": -0.727807504445348,
@@ -1427,6 +1633,7 @@
         "pd_events": 9.0,
         "log_total_2025": 11.057408396963119
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -1445,7 +1652,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1868.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1456,8 +1666,9 @@
       "gender": "Male",
       "actual": 18000,
       "predicted": 14436,
-      "predicted_lo": 2969,
-      "predicted_hi": 70197,
+      "predicted_uncapped": 14436,
+      "predicted_lo": 3005,
+      "predicted_hi": 69344,
       "predicted_oof": 14970,
       "residual_log": -0.22064123395384705,
       "residual_log_oof": -0.1843250582825604,
@@ -1467,6 +1678,7 @@
         "pd_events": 5.0,
         "log_total_2025": 8.995412975433313
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": 0.09972768252637114,
@@ -1485,7 +1697,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1908.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1496,8 +1711,9 @@
       "gender": "Female",
       "actual": 21000,
       "predicted": 17210,
-      "predicted_lo": 3539,
-      "predicted_hi": 83688,
+      "predicted_uncapped": 17210,
+      "predicted_lo": 3583,
+      "predicted_hi": 82671,
       "predicted_oof": 18976,
       "residual_log": -0.1990058927139291,
       "residual_log_oof": -0.10133038056605415,
@@ -1507,6 +1723,7 @@
         "pd_events": 6.0,
         "log_total_2025": 5.62040086571715
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.13274930048007752,
         "pd_round_max": -0.1396187555369197,
@@ -1525,7 +1742,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1438.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1536,8 +1756,9 @@
       "gender": "Male",
       "actual": 18000,
       "predicted": 25832,
-      "predicted_lo": 5312,
-      "predicted_hi": 125609,
+      "predicted_uncapped": 25832,
+      "predicted_lo": 5378,
+      "predicted_hi": 124084,
       "predicted_oof": 28095,
       "residual_log": 0.36122946010473456,
       "residual_log_oof": 0.44523424437754144,
@@ -1547,6 +1768,7 @@
         "pd_events": 8.0,
         "log_total_2025": 8.471777327885755
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.06484230716037798,
         "pd_round_max": 0.09972768252637114,
@@ -1565,7 +1787,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 5145.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1576,8 +1801,9 @@
       "gender": "Female",
       "actual": 17000,
       "predicted": 12071,
-      "predicted_lo": 2482,
-      "predicted_hi": 58696,
+      "predicted_uncapped": 12071,
+      "predicted_lo": 2513,
+      "predicted_hi": 57983,
       "predicted_oof": 11798,
       "residual_log": -0.3424234291351471,
       "residual_log_oof": -0.3653072573127538,
@@ -1587,6 +1813,7 @@
         "pd_events": 1.0,
         "log_total_2025": 7.294377299288821
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -1605,7 +1832,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 200.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "fuzzy",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1616,8 +1846,9 @@
       "gender": "Female",
       "actual": 11000,
       "predicted": 16111,
-      "predicted_lo": 3313,
-      "predicted_hi": 78342,
+      "predicted_uncapped": 16111,
+      "predicted_lo": 3354,
+      "predicted_hi": 77390,
       "predicted_oof": 16600,
       "residual_log": 0.38161083209988433,
       "residual_log_oof": 0.4115234471221605,
@@ -1627,6 +1858,7 @@
         "pd_events": 5.0,
         "log_total_2025": 10.34019289638035
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.047905883648339004,
         "pd_round_max": -0.1396187555369197,
@@ -1645,7 +1877,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 3220.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1656,8 +1891,9 @@
       "gender": "Male",
       "actual": 17000,
       "predicted": 15034,
-      "predicted_lo": 3092,
-      "predicted_hi": 73103,
+      "predicted_uncapped": 15034,
+      "predicted_lo": 3130,
+      "predicted_hi": 72215,
       "predicted_oof": 14408,
       "residual_log": -0.12292471082629675,
       "residual_log_oof": -0.16546302787449285,
@@ -1667,6 +1903,7 @@
         "pd_events": 7.0,
         "log_total_2025": 7.73718007783463
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.2230768925442857,
         "pd_round_max": -0.1396187555369197,
@@ -1685,7 +1922,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2379.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "unmatched",
+        "has_dupr": 0,
+        "gender_inferred": false
       }
     },
     {
@@ -1696,8 +1936,9 @@
       "gender": "Female",
       "actual": 15000,
       "predicted": 15465,
-      "predicted_lo": 3180,
-      "predicted_hi": 75202,
+      "predicted_uncapped": 15465,
+      "predicted_lo": 3220,
+      "predicted_hi": 74289,
       "predicted_oof": 14456,
       "residual_log": 0.030554588098288704,
       "residual_log_oof": -0.03691559000965405,
@@ -1707,6 +1948,7 @@
         "pd_events": 6.0,
         "log_total_2025": 6.803505257608338
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -1725,7 +1967,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "initial_surname",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1736,8 +1981,9 @@
       "gender": "Male",
       "actual": 11000,
       "predicted": 14083,
-      "predicted_lo": 2896,
-      "predicted_hi": 68478,
+      "predicted_uncapped": 14083,
+      "predicted_lo": 2932,
+      "predicted_hi": 67646,
       "predicted_oof": 13869,
       "residual_log": 0.24704442516096137,
       "residual_log_oof": 0.23178013801143393,
@@ -1747,6 +1993,7 @@
         "pd_events": 6.0,
         "log_total_2025": 8.999742789830492
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -1765,7 +2012,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1776,8 +2026,9 @@
       "gender": "Male",
       "actual": 11000,
       "predicted": 18628,
-      "predicted_lo": 3831,
-      "predicted_hi": 90580,
+      "predicted_uncapped": 18628,
+      "predicted_lo": 3878,
+      "predicted_hi": 89480,
       "predicted_oof": 21683,
       "residual_log": 0.5267666748604611,
       "residual_log_oof": 0.6786415684422806,
@@ -1787,6 +2038,7 @@
         "pd_events": 2.0,
         "log_total_2025": 5.438079308923196
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": 0.33907412058966196,
@@ -1805,7 +2057,10 @@
         "pd_podiums": 1.0,
         "pd_prize": 1132.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1816,8 +2071,9 @@
       "gender": "Female",
       "actual": 11000,
       "predicted": 14154,
-      "predicted_lo": 2911,
-      "predicted_hi": 68823,
+      "predicted_uncapped": 14154,
+      "predicted_lo": 2946,
+      "predicted_hi": 67987,
       "predicted_oof": 15383,
       "residual_log": 0.2520669754817799,
       "residual_log_oof": 0.335352646880855,
@@ -1827,6 +2083,7 @@
         "pd_events": 6.0,
         "log_total_2025": 8.881975184248867
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -1845,7 +2102,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1853,11 +2113,12 @@
       "player": "Zoey Weil",
       "team": "Florida Smash",
       "pick_no": 47,
-      "gender": null,
+      "gender": "Female",
       "actual": 10000,
       "predicted": 17217,
-      "predicted_lo": 3541,
-      "predicted_hi": 83719,
+      "predicted_uncapped": 17217,
+      "predicted_lo": 3584,
+      "predicted_hi": 82702,
       "predicted_oof": 19309,
       "residual_log": 0.5433067186415013,
       "residual_log_oof": 0.6579833660966123,
@@ -1867,6 +2128,7 @@
         "pd_events": 7.0,
         "log_total_2025": 7.734558844354756
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.08758550444797343,
         "pd_round_max": -0.1396187555369197,
@@ -1885,7 +2147,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2284.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": true
       }
     },
     {
@@ -1896,8 +2161,9 @@
       "gender": "Female",
       "actual": 11000,
       "predicted": 29057,
-      "predicted_lo": 5976,
-      "predicted_hi": 141294,
+      "predicted_uncapped": 29057,
+      "predicted_lo": 6049,
+      "predicted_hi": 139578,
       "predicted_oof": 30152,
       "residual_log": 0.9713722993006435,
       "residual_log_oof": 1.0083684195418474,
@@ -1907,6 +2173,7 @@
         "pd_events": 7.0,
         "log_total_2025": 11.679227728625255
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.12532953398908878,
         "pd_round_max": 0.33907412058966196,
@@ -1925,7 +2192,10 @@
         "pd_podiums": 1.0,
         "pd_prize": 6071.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1936,8 +2206,9 @@
       "gender": "Male",
       "actual": 9000,
       "predicted": 12141,
-      "predicted_lo": 2497,
-      "predicted_hi": 59035,
+      "predicted_uncapped": 12141,
+      "predicted_lo": 2527,
+      "predicted_hi": 58318,
       "predicted_oof": 11998,
       "residual_log": 0.2993384791304283,
       "residual_log_oof": 0.28747789335801954,
@@ -1947,6 +2218,7 @@
         "pd_events": 5.0,
         "log_total_2025": 7.443663683115591
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.1396187555369197,
@@ -1965,7 +2237,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1624.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -1976,8 +2251,9 @@
       "gender": "Male",
       "actual": 9000,
       "predicted": 13232,
-      "predicted_lo": 2721,
-      "predicted_hi": 64343,
+      "predicted_uncapped": 13232,
+      "predicted_lo": 2755,
+      "predicted_hi": 63562,
       "predicted_oof": 14315,
       "residual_log": 0.3854314431436219,
       "residual_log_oof": 0.4640826582809279,
@@ -1987,6 +2263,7 @@
         "pd_events": 6.0,
         "log_total_2025": 10.46015614461037
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -2005,7 +2282,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "initial_surname",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2016,8 +2296,9 @@
       "gender": "Female",
       "actual": 10000,
       "predicted": 15735,
-      "predicted_lo": 3236,
-      "predicted_hi": 76512,
+      "predicted_uncapped": 15735,
+      "predicted_lo": 3276,
+      "predicted_hi": 75583,
       "predicted_oof": 14472,
       "residual_log": 0.4532883029936077,
       "residual_log_oof": 0.36963772856805477,
@@ -2027,6 +2308,7 @@
         "pd_events": 6.0,
         "log_total_2025": 6.398594934535208
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -2045,7 +2327,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "unmatched",
+        "has_dupr": 0,
+        "gender_inferred": false
       }
     },
     {
@@ -2056,8 +2341,9 @@
       "gender": "Male",
       "actual": 7000,
       "predicted": 9848,
-      "predicted_lo": 2025,
-      "predicted_hi": 47889,
+      "predicted_uncapped": 9848,
+      "predicted_lo": 2050,
+      "predicted_hi": 47308,
       "predicted_oof": 9457,
       "residual_log": 0.3414086970261412,
       "residual_log_oof": 0.3008331637048123,
@@ -2067,6 +2353,7 @@
         "pd_events": 6.0,
         "log_total_2025": 7.801800401908973
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -2085,7 +2372,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1092.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2096,8 +2386,9 @@
       "gender": "Male",
       "actual": 5000,
       "predicted": 8052,
-      "predicted_lo": 1656,
-      "predicted_hi": 39154,
+      "predicted_uncapped": 8052,
+      "predicted_lo": 1676,
+      "predicted_hi": 38678,
       "predicted_oof": 8931,
       "residual_log": 0.4764893714243499,
       "residual_log_oof": 0.5800923299377754,
@@ -2107,6 +2398,7 @@
         "pd_events": 1.0,
         "log_total_2025": 7.20414929203594
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -2125,7 +2417,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 600.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "initial_surname",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2136,8 +2431,9 @@
       "gender": "Female",
       "actual": 4000,
       "predicted": 13989,
-      "predicted_lo": 2877,
-      "predicted_hi": 68024,
+      "predicted_uncapped": 13989,
+      "predicted_lo": 2912,
+      "predicted_hi": 67197,
       "predicted_oof": 15183,
       "residual_log": 1.251986221911734,
       "residual_log_oof": 1.3338539043865527,
@@ -2147,6 +2443,7 @@
         "pd_events": 6.0,
         "log_total_2025": 9.155884186180124
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -2165,7 +2462,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2246.0,
         "has_results": 0,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2176,8 +2476,9 @@
       "gender": "Male",
       "actual": 4000,
       "predicted": 10956,
-      "predicted_lo": 2253,
-      "predicted_hi": 53277,
+      "predicted_uncapped": 10956,
+      "predicted_lo": 2281,
+      "predicted_hi": 52630,
       "predicted_oof": 13803,
       "residual_log": 1.0076317761174636,
       "residual_log_oof": 1.2385946717798362,
@@ -2187,6 +2488,7 @@
         "pd_events": 10.0,
         "log_total_2025": 9.557964480394498
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -2205,7 +2507,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2678.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2216,8 +2521,9 @@
       "gender": "Female",
       "actual": 5000,
       "predicted": 17485,
-      "predicted_lo": 3596,
-      "predicted_hi": 85024,
+      "predicted_uncapped": 17485,
+      "predicted_lo": 3640,
+      "predicted_hi": 83991,
       "predicted_oof": 20959,
       "residual_log": 1.2519154151639214,
       "residual_log_oof": 1.433139447833895,
@@ -2227,6 +2533,7 @@
         "pd_events": 1.0,
         "log_total_2025": 10.519132545566643
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.3188886598409636,
         "pd_round_max": -0.1396187555369197,
@@ -2245,7 +2552,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1200.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2256,8 +2566,9 @@
       "gender": "Male",
       "actual": 2000,
       "predicted": 21381,
-      "predicted_lo": 4397,
-      "predicted_hi": 103970,
+      "predicted_uncapped": 21381,
+      "predicted_lo": 4451,
+      "predicted_hi": 102707,
       "predicted_oof": 23575,
       "residual_log": 2.3693764459358793,
       "residual_log_oof": 2.46704157490381,
@@ -2267,6 +2578,7 @@
         "pd_events": 6.0,
         "log_total_2025": 11.439160510902152
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": 0.0930696796804431,
         "pd_round_max": 0.09972768252637114,
@@ -2285,7 +2597,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 3938.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2296,8 +2611,9 @@
       "gender": "Male",
       "actual": 2000,
       "predicted": 11169,
-      "predicted_lo": 2297,
-      "predicted_hi": 54310,
+      "predicted_uncapped": 11169,
+      "predicted_lo": 2325,
+      "predicted_hi": 53650,
       "predicted_oof": 9879,
       "residual_log": 1.719981812059764,
       "residual_log_oof": 1.5972271077872762,
@@ -2307,6 +2623,7 @@
         "pd_events": 5.0,
         "log_total_2025": 12.576977364287115
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.2230768925442857,
         "pd_round_max": -0.1396187555369197,
@@ -2325,7 +2642,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2195.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2336,8 +2656,9 @@
       "gender": "Female",
       "actual": 2000,
       "predicted": 9917,
-      "predicted_lo": 2039,
-      "predicted_hi": 48220,
+      "predicted_uncapped": 9917,
+      "predicted_lo": 2064,
+      "predicted_hi": 47634,
       "predicted_oof": 10923,
       "residual_log": 1.6010535138489512,
       "residual_log_oof": 1.6977424960808918,
@@ -2347,6 +2668,7 @@
         "pd_events": 5.0,
         "log_total_2025": 6.576469569048224
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -2365,7 +2687,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1764.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2376,8 +2701,9 @@
       "gender": "Female",
       "actual": 2000,
       "predicted": 12153,
-      "predicted_lo": 2499,
-      "predicted_hi": 59096,
+      "predicted_uncapped": 12153,
+      "predicted_lo": 2530,
+      "predicted_hi": 58378,
       "predicted_oof": 13329,
       "residual_log": 1.8044445089681638,
       "residual_log_oof": 1.8967868480600725,
@@ -2387,6 +2713,7 @@
         "pd_events": 1.0,
         "log_total_2025": 7.134890851565884
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -2405,7 +2732,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 152.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2416,8 +2746,9 @@
       "gender": "Male",
       "actual": 1000,
       "predicted": 14371,
-      "predicted_lo": 2955,
-      "predicted_hi": 69882,
+      "predicted_uncapped": 14371,
+      "predicted_lo": 2992,
+      "predicted_hi": 69033,
       "predicted_oof": 15889,
       "residual_log": 2.6652356814013256,
       "residual_log_oof": 2.7656222977539198,
@@ -2427,6 +2758,7 @@
         "pd_events": 4.0,
         "log_total_2025": 10.367127224695365
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.01983981039981721,
         "pd_round_max": -0.1396187555369197,
@@ -2445,7 +2777,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 1960.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2456,8 +2791,9 @@
       "gender": "Female",
       "actual": 1000,
       "predicted": 12496,
-      "predicted_lo": 2570,
-      "predicted_hi": 60762,
+      "predicted_uncapped": 12496,
+      "predicted_lo": 2601,
+      "predicted_hi": 60024,
       "predicted_oof": 14241,
       "residual_log": 2.525391562032633,
       "residual_log_oof": 2.656098714454661,
@@ -2467,6 +2803,7 @@
         "pd_events": 7.0,
         "log_total_2025": 12.072604108073081
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.2230768925442857,
         "pd_round_max": -0.1396187555369197,
@@ -2485,7 +2822,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 3033.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2496,8 +2836,9 @@
       "gender": "Male",
       "actual": 1000,
       "predicted": 9595,
-      "predicted_lo": 1973,
-      "predicted_hi": 46658,
+      "predicted_uncapped": 9595,
+      "predicted_lo": 1998,
+      "predicted_hi": 46092,
       "predicted_oof": 9641,
       "residual_log": 2.261273780217733,
       "residual_log_oof": 2.2660202013215116,
@@ -2507,6 +2848,7 @@
         "pd_events": 6.0,
         "log_total_2025": 8.412499120301572
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.358568280640598,
         "pd_round_max": -0.3789651936002105,
@@ -2525,7 +2867,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2013.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     },
     {
@@ -2536,8 +2881,9 @@
       "gender": "Female",
       "actual": 1000,
       "predicted": 16214,
-      "predicted_lo": 3334,
-      "predicted_hi": 78842,
+      "predicted_uncapped": 16214,
+      "predicted_lo": 3375,
+      "predicted_hi": 77884,
       "predicted_oof": 17859,
       "residual_log": 2.7858669906318525,
       "residual_log_oof": 2.882504757008663,
@@ -2547,6 +2893,7 @@
         "pd_events": 8.0,
         "log_total_2025": 7.823245690685523
       },
+      "capped": false,
       "contributions": {
         "pd_doubles_mean": -0.1892040455202076,
         "pd_round_max": -0.1396187555369197,
@@ -2565,7 +2912,10 @@
         "pd_podiums": 0.0,
         "pd_prize": 2668.0,
         "has_results": 1,
-        "imputed_total_2025": false
+        "imputed_total_2025": false,
+        "dupr_match_kind": "exact",
+        "has_dupr": 1,
+        "gender_inferred": false
       }
     }
   ]

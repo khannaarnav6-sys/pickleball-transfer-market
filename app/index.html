@@ -113,7 +113,7 @@
   .verdict p { font-size: 15.5px; color: var(--ink-2); max-width: 70ch; }
   .verdict strong { color: var(--ink); font-weight: 600; }
 
-  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 1px;
            background: var(--line); border: 1px solid var(--line);
            border-radius: 3px; overflow: hidden; margin-top: 18px; }
   @media (max-width: 680px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
@@ -190,6 +190,10 @@
              display: flex; justify-content: space-between; gap: 10px; }
   .wi-name span:last-child { font-family: var(--figure); color: var(--under); font-weight: 500; }
   input[type="range"] { width: 100%; accent-color: var(--under); margin: 0; }
+  .wi-na { font-size: 12.5px; color: var(--under); font-style: italic; }
+  .capnote { margin: 0; padding: 12px 20px; font-size: 13px; line-height: 1.55;
+    color: var(--ink-2); background: var(--panel-2);
+    border-top: 1px solid var(--line); border-left: 3px solid var(--over); }
   .toggle { display: flex; gap: 6px; }
   .toggle button { font-size: 12.5px; font-weight: 600; padding: 5px 12px; cursor: pointer;
     border: 1px solid var(--line-strong); background: var(--panel); color: var(--ink-2);
@@ -375,7 +379,9 @@
       <p>Features from <a href="https://www.dinkbank.com" rel="noopener">DinkBank</a>
          &#x2014; career earnings, UPA card tiers, and the per-bracket tournament results
          that the form features are built from. Draft prices from published 2026 draft coverage.
-         Never sourced from DUPR directly &#x2014; their terms prohibit automated access.</p>
+         DUPR doubles ratings supplied directly by DUPR on request (November 2026) and used
+         under the terms of that request: the normalised rating term is published here, the
+         underlying ratings are not. Never scraped &#x2014; their terms prohibit automated access.</p>
       <p id="footnote"></p>
     </footer>
   </div>
@@ -447,13 +453,14 @@ function renderHeader() {
     "<p><strong>Recent doubles form predicts draft price; career earnings barely do.</strong> " +
     "Cross-validated R\u00b2 is <strong>" + fmtR2(M.r2) + "</strong> \u2014 against " +
     fmtR2(base.r2) + " for an earnings-only model and " + fmtR2(M.baselines.mean_only.r2) +
-    " for guessing the average. The single strongest feature is <strong>how deep a player " +
-    "ran in doubles brackets</strong> in the seven weeks before the draft, and it is the " +
-    "only term here whose confidence interval clears zero (p = 0.001).</p>" +
+    " for guessing the average. The strongest feature is <strong>how deep a player ran in " +
+    "doubles brackets</strong> in the seven weeks before the draft (p = " +
+    ((M.features.find(f => f.name === "pd_doubles_mean") || {}).p_value || 0).toFixed(3) + ").</p>" +
     "<p>That fits the format: MLP starting fours are two men and two women playing <strong>team " +
     "doubles</strong>, so teams bid on current doubling ability, not on career prize money. " +
     "Earnings were the best public proxy available until on-court results were added; with " +
     "form in the model, the earnings term stops carrying weight entirely.</p>" +
+    duprVerdict() +
     "<p><strong>It is still a 60-player model and the band is wide.</strong> Fold-to-fold R\u00b2 " +
     "ranges from " + fmtR2(M.fold_r2_p10) + " to " + fmtR2(M.fold_r2_p90) + ". Read every " +
     "figure as a <strong>modeled value</strong>, never a price.</p>";
@@ -470,6 +477,51 @@ function renderHeader() {
   $("tiles").innerHTML = tiles.map(t =>
     '<div class="tile"><span class="v">' + t.v + '</span><span class="n">' + t.n +
     "</span></div>").join("");
+}
+
+/** Why the DUPR term is absent from the table above. */
+function duprCoefNote() {
+  const d = M.dupr, e = d && d.experiment;
+  if (!d || !d.available || !e || !e.available) return "";
+  const w = e.within.women, m = e.within.men;
+  return "<br><br><b>There is no DUPR term in this table, and that was a close call.</b> " +
+    "Within the women's field the rating correlates " + fmtSigned(w.corr) + " with log " +
+    "price, within the men's " + fmtSigned(m.corr) + ", so carrying it as a within-field " +
+    "z-score interacted with is_female is the specification the data suggests. Fitted on " +
+    "all 60 it lands at +0.291 with a 95% interval of [\u22120.138, +0.721], p = 0.18 " +
+    "\u2014 wider than it looked before five blank-gender picks were resolved from the " +
+    "brackets they entered. Held out, it is worth " + fmtR2(e.r2_dupr) + " against " +
+    fmtR2(e.r2_form) + ", better in " + e.paired_better + " of " + e.paired_repeats +
+    " repeats (p = " + e.paired_p.toFixed(2) + "). The honest read is <b>no measurable " +
+    "gain over recent form</b>: whatever a rating knows about a player, seven weeks of " +
+    "their actual results already said it. The men's figure is the more interesting " +
+    "half \u2014 dropping the three best-known racket-sport crossovers makes it " +
+    "<i>worse</i>, so celebrity pricing is not the explanation.";
+}
+
+/** The DUPR result: tested, measured, not shipped. Numbers come from the
+    payload so this paragraph cannot drift from what the model found. */
+function duprVerdict() {
+  const d = M.dupr, e = d && d.experiment;
+  if (!d || !d.available || !e || !e.available) return "";
+  const w = e.within.women, m = e.within.men;
+  return "<p><strong>DUPR sent their ratings, and they did not improve the model.</strong> " +
+    "Their terms prohibit automated access, so this project asked; they supplied a " +
+    d.pool_after_cutoff + "-player file, " + d.matched + " of whom were drafted. The " +
+    "promising part is real: within the women's field a doubles rating correlates " +
+    "<strong>" + fmtSigned(w.corr) + "</strong> with log price, within the men's only " +
+    "<strong>" + fmtSigned(m.corr) + "</strong>. Carried as a within-field z-score, it " +
+    "first scored R\u00b2 +0.407 against form's +0.354.</p>" +
+    "<p><strong>That gain was a bug.</strong> Five picks had no recorded gender and were " +
+    "counted as men; two were women. Filling gender from the gendered brackets players " +
+    "actually entered moved the term's interval back across zero and the paired gain to " +
+    "nothing: <strong>" + fmtR2(e.r2_dupr) + "</strong> against <strong>" +
+    fmtR2(e.r2_form) + "</strong>, better in only " + e.paired_better + " of " +
+    e.paired_repeats + " independent repeats (p = " + e.paired_p.toFixed(2) + "). Rank " +
+    "correlation did improve, " + fmtSigned(e.spearman_form) + " to " +
+    fmtSigned(e.spearman_dupr) + ", but after a dozen specifications on 60 rows that is " +
+    "not enough to ship a term on. <strong>It is reported here and left out of the " +
+    "model.</strong> The within-field gap is still worth retesting on the next draft.</p>";
 }
 
 function renderLookupControls() {
@@ -508,16 +560,29 @@ function select(key, keepQuery) {
 
 /* The model, re-evaluated in the browser. Standardize, dot with the coefficients,
    add the intercept. At a player's own values this reproduces `predicted` exactly. */
+function fmtSigned(v) { return (v >= 0 ? "+" : "\u2212") + Math.abs(v).toFixed(2); }
+
 function scoreLog(featureValues) {
   let s = M.intercept;
   for (const f of M.features) s += f.coef * ((featureValues[f.name] - f.mean) / f.std);
-  return s;
+  // Same ceiling the fitted model applies: never value anyone above the
+  // priciest player it trained on. Without this the what-if panel contradicts
+  // the card for the one player the cap binds on.
+  return Math.min(s, Math.log(M.cap_dollars));
+}
+
+/** True when the linear terms ran past the cap and the shown value is the ceiling. */
+function isCapped(featureValues) {
+  let s = M.intercept;
+  for (const f of M.features) s += f.coef * ((featureValues[f.name] - f.mean) / f.std);
+  return s > Math.log(M.cap_dollars) + 1e-9;
 }
 
 function renderCard() {
   const p = SEL, d = p.display;
   const dir = p.residual_log > 0 ? "under" : "over";
-  const verdict = Math.abs(p.residual_log) < 0.35 ? ["flat", "About right"]
+  const verdict = p.capped ? ["flat", "At the cap"]
+    : Math.abs(p.residual_log) < 0.35 ? ["flat", "About right"]
     : p.residual_log > 0 ? ["under", "Modeled cheap"] : ["over", "Modeled dear"];
 
   const contribs = M.features.map(f => ({
@@ -525,7 +590,9 @@ function renderCard() {
   })).sort((a, b) => Math.abs(b.v) - Math.abs(a.v));
   const maxAbs = Math.max(...contribs.map(c => Math.abs(c.v)), 0.001);
 
-  const meta = ["Pick #" + p.pick_no, p.team, p.gender || "gender not recorded"].join("  \u00b7  ");
+  const meta = ["Pick #" + p.pick_no, p.team,
+    (p.gender || "gender not recorded") +
+      (d.gender_inferred ? " (from brackets entered)" : "")].join("  \u00b7  ");
 
   const ladder = { 7: "Champion", 6: "Runner-up", 5: "3rd", 4: "4th / semis",
                    3: "Quarterfinals", 2: "Round of 16", 1: "Round of 32" };
@@ -557,6 +624,14 @@ function renderCard() {
         '<span class="band">' + M.band_label + " band " + fmtMoney(p.predicted_lo) +
         " \u2013 " + fmtMoney(p.predicted_hi) + "</span></div>" +
     "</div>" +
+
+    (p.capped
+      ? '<p class="capnote">This is the <b>cap</b>, not a correct call. The model never ' +
+        "values anyone above the priciest player it trained on, and " + esc(p.player) +
+        " <i>is</i> that player, so the ceiling here equals her own price. The terms below " +
+        "actually add up to <b>" + fmtExact(p.predicted_uncapped) + "</b>; held out of " +
+        "training the uncapped model reaches $7.2M for her, which is why the cap exists.</p>"
+      : "") +
 
     '<div class="bars"><span class="lbl">What moves this valuation</span>' +
       '<p class="hint" style="margin:6px 0 10px;">Each feature\u2019s push away from the ' +
@@ -593,19 +668,37 @@ function renderCard() {
   buildWhatIf();
 }
 
+/* money, linear and zscore all drag; the yes/no kinds don't. */
+function isSlider(f) {
+  return f.kind === "money" || f.kind === "linear" || f.kind === "zscore";
+}
+
+/* The DUPR term is a within-field z-score multiplied by is_female, so for a man
+   it is structurally zero and there is nothing to drag. Say that instead of
+   offering a control that cannot do anything. */
+function duprInert(f) {
+  return f.kind === "zscore" && SEL.gender !== "Female";
+}
+
 function buildWhatIf() {
   WI = { ...SEL.features };
   $("wi-grid").innerHTML = M.features.map(f => {
     const out = '<span class="wi-name"><span>' + esc(f.label) +
       '</span><span class="num" data-out="' + f.name + '"></span></span>';
-    if (f.kind === "money" || f.kind === "linear") {
+    if (duprInert(f)) {
+      return '<div class="wi-row">' + out +
+        '<span class="wi-na">not used for men \u2014 see method</span></div>';
+    }
+    if (isSlider(f)) {
       // Money slides in log space: linear dollars would spend most of the travel
       // above $100k. The form features sit on a small linear scale already.
       const money = f.kind === "money";
       const lo = money ? Math.log1p(f.display_min) : f.display_min;
       const hi = money ? Math.log1p(f.display_max) : f.display_max;
       const val = Math.min(Math.max(WI[f.name], lo), hi);
-      const step = money ? (hi - lo) / 240 : (f.decimals ? 0.01 : 1);
+      const step = money ? (hi - lo) / 240
+        : f.kind === "zscore" ? (hi - lo) / 240
+        : (f.decimals ? 0.01 : 1);
       return '<div class="wi-row">' + out + '<input type="range" id="wi-' + f.name +
         '" data-f="' + f.name + '" min="' + lo + '" max="' + hi +
         '" step="' + step + '" value="' + val +
@@ -633,17 +726,19 @@ function buildWhatIf() {
 function syncWhatIf() {
   for (const f of M.features) {
     const input = $("wi-" + f.name);
-    const slider = f.kind === "money" || f.kind === "linear";
+    const slider = isSlider(f) && !duprInert(f);
     // While dragging, the range input is the source of truth.
     if (slider && input) WI[f.name] = parseFloat(input.value);
 
     const out = $("wi-grid").querySelector('[data-out="' + f.name + '"]');
     if (out) {
       out.textContent = f.kind === "money" ? fmtMoney(Math.expm1(WI[f.name]))
+        : f.kind === "zscore" ? (duprInert(f) ? "0.00 SD"
+            : (WI[f.name] >= 0 ? "+" : "") + WI[f.name].toFixed(2) + " SD")
         : f.kind === "linear" ? WI[f.name].toFixed(f.decimals || 0)
         : (WI[f.name] >= 0.5 ? "yes" : "no");
     }
-    if (!slider) {
+    if (!slider && f.kind !== "zscore") {
       const y = $("wi-" + f.name + "-y"), n = $("wi-" + f.name + "-n");
       if (y) y.setAttribute("aria-pressed", String(WI[f.name] >= 0.5));
       if (n) n.setAttribute("aria-pressed", String(WI[f.name] < 0.5));
@@ -666,7 +761,7 @@ function syncWhatIf() {
     WI = { ...SEL.features };
     for (const f of M.features) {
       const input = $("wi-" + f.name);
-      if ((f.kind === "money" || f.kind === "linear") && input) {
+      if (isSlider(f) && input) {
         input.value = Math.min(Math.max(WI[f.name], parseFloat(input.min)),
                                parseFloat(input.max));
       }
@@ -841,7 +936,7 @@ function renderWhy() {
     "points track the yellow line instead of forming the flat band an earnings-only model " +
     "produced. Both axes are logarithmic. The fit is real but loose: in-sample R\u00b2 is " +
     d.in_sample_r2.toFixed(2) + ", cross-validated " + fmtR2(M.r2) + ", and the gap between " +
-    "those two is the price of fitting four features to " + M.n + " players.";
+    "those two is the price of fitting five terms to " + M.n + " players.";
 
   const pts = DATA.players.map(p => ({
     x: L10(p.actual), y: L10(p.predicted), up: p.residual_log > 0, name: p.player,
@@ -932,20 +1027,23 @@ function renderCoefs() {
     "negative as \u201cearning more lowers your price\u201d \u2014 it is a suppression " +
     "effect between two correlated predictors, and the interval comfortably spans zero. " +
     "The honest statement is that <b>earnings stopped mattering once form was measured</b>." +
-    "<br><br>Gender and DUPR were dropped. The apparent female premium was two rows: the " +
-    "F\u2212M gap in mean log price is +0.42 across all 60 and <b>+0.14</b> once Anna " +
-    "Bright and Jorja Johnson are set aside. Carrying a term that rests on two players " +
-    "was not defensible.";
+    duprCoefNote() +
+    "<br><br>A plain female-premium term was tried and dropped too: the F\u2212M gap in " +
+    "mean log price is +0.42 across all 60 and <b>+0.14</b> once Anna Bright and Jorja " +
+    "Johnson are set aside. A term resting on two rows was not defensible.";
 }
 function renderMethod() {
-  const b = M.baselines, f = M.form;
+  const b = M.baselines, f = M.form, du = M.dupr;
   $("methodnote").innerHTML =
     "Ridge regression (\u03b1 = " + M.alpha + ") on standardized features, target " +
     "<code>log(price)</code>, scored by repeated 5-fold cross-validation (" + M.n_folds +
     " folds). Features: average and best round reached in pre-draft brackets, brackets " +
     "entered, and <code>log1p</code> of 2025 earnings. Form is built from " +
     "per-bracket tournament results dated strictly before <code>" + f.cutoff + "</code>, " +
-    "draft day.";
+    "draft day; DUPR ratings are filtered by the same cutoff on their " +
+    "<code>rating_date</code>, which drops " +
+    (du.pool_after_cutoff != null ? "1 of " + (du.pool_after_cutoff + 1) : "0") +
+    " rows in the file.";
 
   const notes = [
     ["01", "<b>The date cutoff is the leakage control.</b> Form uses only brackets that " +
@@ -955,22 +1053,57 @@ function renderMethod() {
       "betting on \u2014 using them would be predicting the past from the future."],
     ["02", "<b>Form coverage is " + f.covered + " of " + M.n + ".</b> " + f.imputed +
       " players entered no rated bracket in the window and take the median, flagged on " +
-      "their card. That is better coverage than the DUPR rating this model used to lean " +
-      "on (29 of 60)."],
+      "their card. DUPR coverage, for the experiment that used it, is " + du.matched +
+      " of " + M.n + "; the three misses (" + du.unmatched_players.join(", ") + ") are " +
+      "not in the file DUPR sent."],
+    ["02b", "<b>The DUPR ratings were given, not taken \u2014 and then not used.</b> " +
+      "DUPR's terms prohibit " +
+      "automated access, so this project asked instead, and they supplied a " +
+      (du.pool_after_cutoff != null ? (du.pool_after_cutoff + 1) : "153") +
+      "-player file in November 2026. Two rules apply to it, both leakage controls: a " +
+      "rating stamped on or after draft day is discarded, because <code>rating_date</code> " +
+      "is the day the rating last moved; and a rating of exactly 0.000 is DUPR's " +
+      "\u201cunrated\u201d placeholder, not a skill of zero. Matched ratings run " +
+      du.date_min + " to " + du.date_max + ". The request said this project was not " +
+      "looking to republish ratings, so <b>no rating, id or per-gender mean and sd " +
+      "appears in this page's data file</b> \u2014 only the normalised term, which cannot " +
+      "be inverted back to a rating without those moments. The term they feed is " +
+      "measured on every export and left out of the model; see the coefficients section."],
+    ["02c", "<b>Five picks had no recorded gender, and that turned out to matter.</b> " +
+      "Draft coverage lists gender for 55 of 60 and DinkBank did not fill the rest, so " +
+      "those five defaulted to not-female. Two of them are women. Gender is now read off " +
+      "the gendered brackets a player actually entered \u2014 men's singles and doubles " +
+      "against women's \u2014 which agrees with the recorded value on every player who " +
+      "has both and never puts anyone in both draws. <code>features.py</code> raises if " +
+      "those two sources ever disagree rather than quietly preferring one. Fixing it " +
+      "changed a DUPR result from significant to not; it is the reason that term is " +
+      "reported rather than shipped."],
     ["03", "<b>The feature set was chosen by nested cross-validation</b>, so the headline " +
-      "number pays for the search. An inner loop picked among five candidate sets and five " +
-      "ridge strengths inside each training fold; the outer score was " +
-      "<b>+0.304</b>, close to the " + fmtR2(M.r2) + " quoted here. The inner loop never " +
-      "once selected an earnings-only or pre-form set."],
+      "number pays for the search. An inner loop picked among five candidate sets and " +
+      "five ridge strengths inside each training fold; the outer score was <b>+0.220</b>, " +
+      "well below the " + fmtR2(M.r2) + " quoted here. That gap is the honest cost of " +
+      "having searched: with 48 training rows the inner loop cannot reliably tell a 0.41 " +
+      "candidate from a 0.35 one, and it settles on heavy regularisation (\u03b1 = 100 or " +
+      "30 in 17 of 20 outer folds) that costs it accuracy. It never once selected an " +
+      "earnings-only or pre-form set. It did drop 2025 earnings in 15 of 20 folds, but a " +
+      "paired comparison across matched folds did not support dropping it (better in 6 of " +
+      "20 repeats, p = 0.05), so the term stays."],
     ["04", "<b>It beats both baselines now.</b> Predict-the-mean scores " +
       fmtR2(b.mean_only.r2) + ", 2025 earnings alone " + fmtR2(b.earnings_only.r2) +
-      ", this model " + fmtR2(M.r2) + ". The earlier four-feature model built on earnings, " +
-      "gender and DUPR scored +0.033 and lost to the earnings baseline."],
-    ["05", "<b>Mean dollar error went up, and that is not a regression.</b> Mean absolute " +
-      "error is " + fmtMoney(M.mae_dollars) + ", worse than the old model's $56K, because " +
-      "two picks carry half the draft's dollars and the model now predicts boldly enough " +
-      "to miss them by large absolute amounts. On the robust measures it improved: median " +
-      "absolute error fell from $15.4K to $14.3K and mean log error from 1.13 to 0.97."],
+      ", this model " + fmtR2(M.r2) + ". The first version of this project, built on " +
+      "earnings, gender and a raw DUPR rating, scored +0.033 and lost to the earnings " +
+      "baseline. Pre-draft form took it to +0.344, and capping predictions at the " +
+      "training-fold maximum took it to " + fmtR2(M.r2) + "."],
+    ["05", "<b>Predictions are capped at the priciest player in the training fold.</b> " +
+      "Anna Bright went for " + fmtMoney(M.cap_dollars) + " \u2014 54% more than the next " +
+      "pick \u2014 so when she is held out the model has no comparable example and " +
+      "extrapolated to $7.2M. The cap replaces that with \u201cat least as expensive as " +
+      "anyone I have seen\u201d. It moves " + M.n_capped + " of " + M.n + " predictions " +
+      "and cuts mean absolute error from $129K to " + fmtMoney(M.mae_dollars) + ". " +
+      "Her card is labelled, because in the all-60 fit the cap equals her own price and " +
+      "would otherwise look like a perfect call. Median absolute error is " +
+      "<b>$12.8K</b> and mean log error <b>0.94</b>, against $15.4K and 1.13 for the " +
+      "original earnings model."],
     ["06", "<b>Form is seven weeks of one tour.</b> DinkBank's results table covers 2026 " +
       "only, so the window runs 12 January to 16 February 2026 and every bracket in it is " +
       "PPA. There is no career match history here and no APP or MLP play in the window."],

@@ -44,8 +44,8 @@ automated fetching).
 | `contracts_2025`, `prize_2025` | partial | `total` splits into contract + prize |
 | `gender` | 55/60 | |
 | `card_tier` | 47/60 | UPA contract tier |
-| ~~`dupr_doubles`~~ | — | **Removed, see below** |
-| ~~`dupr_singles`~~ | — | **Removed, see below** |
+| `dupr_doubles` | `data/dupr_ratings.csv` (gitignored) | Supplied by DUPR on request; tested, not shipped — see below |
+| `dupr_singles` | `data/dupr_ratings.csv` (gitignored) | Not used; correlates +0.08 with log price |
 | `birth_year` | 5/60 | **Unusable — drop age entirely** |
 | `events` | partial | Only where the bio states it |
 
@@ -126,33 +126,103 @@ on average, because MLP starting fours are 2M/2W and the two priciest picks
 (Anna Bright $1.23M, Jorja Johnson $800k) were women. Keep the gender term, but
 for the female premium.
 
-## Why there are no DUPR ratings in this repo
+## DUPR ratings: granted, tested, not used
 
-The published dataset carries **no DUPR values**, and `extract_players.py` no
-longer writes them out. Two reasons, in order:
+**DUPR supplied ratings directly on 2026-11-08**, in response to the access
+request in `docs/`. 153 players with singles and doubles ratings and a
+`rating_date`. This replaced the earlier situation, where the only reachable
+ratings were current ones carrying seven months of post-draft results.
 
-1. **The model stopped using them.** Once pre-draft form was added, `has_dupr`
-   was dropped from the feature set; the rating value itself was never used,
-   because the only ratings reachable were current ones carrying seven months of
-   post-draft results.
-2. **This project does not redistribute DUPR ratings.** They were only ever
-   reachable second-hand through DinkBank, and a public repo mirroring them
-   would be republishing another party's ratings. The request for proper
-   as-of-draft-date ratings is in `docs/` and is not part of the public repo.
+The file lives at `data/dupr_ratings.csv` and is **gitignored**. The request
+said this project was not looking to republish ratings, so the file stays local
+and `app/data.json` carries no rating, no DUPR id, and no per-gender mean/sd —
+without those moments a normalised term cannot be inverted back to a rating.
 
-The measured correlation of +0.29 noted above is kept as a recorded finding. If
-DUPR grants historical access, ratings come back under whatever terms they set.
+### What was done with it
+
+`src/dupr.py` joins on name using the same exact → initial+surname → fuzzy
+ladder as the DinkBank join, and enforces two leakage controls: a rating dated
+on or after `DRAFT_DATE` is discarded (`rating_date` is the day the rating last
+moved, so a draft-day stamp reflects matches bidders had not seen), and a rating
+of exactly `0.000` is DUPR's "unrated" placeholder, not a skill of zero.
+
+| | |
+|---|---|
+| rows supplied | 153 |
+| after date cutoff | 152 (drops Chao Yi Wang, dated 2026-02-27) |
+| matched to the 60 drafted | 57 (50 exact, 6 initial+surname, 1 fuzzy) |
+| not in the file | Ava Cavataio, Genie Bouchard, Tom Protzek |
+| matched rating dates | 2025-11-22 to 2026-02-23 |
+
+Every non-exact match was checked by hand and all seven are correct (Mari /
+Mariana Humberg, Alli / Allison Phillips, Victoria Di Muzio / DiMuzio, Alex /
+Alexander Crum, Chris / Christopher Crouch, Chris / Christopher Haworth, John
+Lucian Goins / John Goins). The matcher correctly refused to pair **Genie
+Bouchard** with **Genie Erokhina**.
+
+### The result: no measurable gain over recent form
+
+Raw, a DUPR doubles rating correlates +0.34 with log price — real, but weaker
+than `pd_doubles_mean` at +0.61, and 0.42 correlated with it. Added as a fifth
+feature it made the model *worse* (+0.354 → +0.317): at n=60 it cost more in
+variance than it returned in signal.
+
+The specification that looked right is a **within-field z-score interacted with
+`is_female`**, because the rating behaves completely differently by field:
+
+```
+corr(log price, dupr_doubles)   women  +0.675   n=31
+                                men    +0.216   n=29
+```
+
+That term reached CV R² **+0.407** against form's +0.354, with p = 0.034 — and
+then a data fix removed it. See the next section. The honest final numbers:
+
+| | CV R² | Spearman | paired vs form |
+|---|---|---|---|
+| form only (shipped) | **+0.354** | +0.448 | — |
+| form + DUPR term | +0.359 | +0.492 | better in 13/20 repeats, p = 0.45 |
+
+The coefficient's 95% interval is [−0.138, +0.721], p = 0.18. **Not shipped.** A
+term that clears no significance bar, found after a dozen specifications on 60
+rows, is exactly the overfitting-by-search this project exists to avoid. It is
+kept wired up as `features.DUPR_CANDIDATE` and re-measured on every export, so
+the published page reports the finding rather than a number typed in once.
+
+Worth retesting on the next draft: the within-field asymmetry is large, and
+dropping the three best-known racket-sport crossovers makes the men's
+correlation *worse* (+0.22 → +0.09), so celebrity pricing is not the
+explanation.
+
+## The gender bug that changed the DUPR answer
+
+Draft coverage records gender for 55 of 60 and DinkBank did not fill the rest,
+so five picks defaulted to not-female. **Two of them are women** (Elsie
+Hendershot, Zoey Weil; the other three — Jack Sock, Camden Chaffin, Len Yang —
+are men). That mattered only once `is_female` started gating a feature.
+
+`features.infer_gender()` now reads gender off the **gendered brackets a player
+actually entered**: MD/MS is a man, WD/WS a woman. This agrees with the recorded
+value on every player who has both, and nobody appears in both MD and WD, which
+is what makes it safe — `load()` raises on any disagreement rather than quietly
+preferring one source.
+
+Filling those five moved the DUPR term's coefficient from +0.402 to +0.291, its
+interval back across zero, and its paired gain to nothing. **The significant
+result was an artifact of two misclassified women.**
 
 ## Caveats that matter
 
-1. **DUPR ratings here are current (Sept 2026), not as-of the Feb 2026 draft.**
-   They carry ~7 months of post-draft information, so any model using them is
-   partly predicting the past from the future and will look better than it is.
-   `total_2025` and earlier are genuinely pre-draft and safe. This is the single
-   strongest argument for the DUPR API request — historical ratings fix it.
+1. **DUPR ratings are now as-of a pre-draft date, and still unused.** The file
+   DUPR supplied carries a `rating_date` per player and anything dated on or
+   after draft day is dropped, so the old "predicting the past from the future"
+   problem is gone. The ratings simply did not add predictive power over recent
+   form — see above.
 2. **`pick_no` is an outcome, not a feature.** It's produced by the same auction
    that sets price. Using it leaks the target.
-3. **Source is DinkBank, never DUPR directly.** DUPR's terms prohibit automated
-   access; DinkBank republishes ratings and its robots.txt allows all crawlers.
+3. **Scraped features come from DinkBank, never from DUPR.** DUPR's terms
+   prohibit automated access; DinkBank republishes ratings and its robots.txt
+   allows all crawlers. The DUPR ratings in this project were **given on
+   request**, not taken, and are not redistributed.
 4. Some DinkBank figures are their own estimates rather than confirmed values;
    they label which on-site but the label isn't captured here.
